@@ -6,17 +6,18 @@
   margin-bottom: $card-margin-bottom;
   transition: all 0.3s ease;
   letter-spacing: 0.5px;
-  border: $card-border;
+  // border: $card-border;
+  border: 1px dashed #dedbdb;
   border-radius: $card-border-radius;
   background-color: $card-header-bg-color;
+  box-shadow: $card-hover-box-shadow;
   &:hover {
-    box-shadow: $card-hover-box-shadow;
     transition: all 0.3s ease;
   }
   .card-header {
     background-color: $card-header-bg-color;
     padding: $card-padding;
-    border-bottom: none;
+    border-bottom: 1px dashed #dedbdb;
     border-top-left-radius: $card-border-radius;
     border-top-right-radius: $card-border-radius;
     position: relative;

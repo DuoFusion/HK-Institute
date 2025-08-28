@@ -1,29 +1,28 @@
-export interface PrivacyPolicyType {
-  _id: string;
-  isDeleted: boolean;
-  createdAt: string;
-  privacyPolicy: string;
-  updatedAt: string;
-}
+import { CommonDataType, MessageStatus } from "./CoreComponents";
 
-export interface AboutUsType {
+export interface TermsAndConditionsType extends CommonDataType {
   _id: string;
-  isDeleted: boolean;
-  aboutUs: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface TermsConditionType {
-  _id: string;
-  isDeleted: boolean;
   termsCondition: string;
-  createdAt: string;
-  updatedAt: string;
 }
 
-export interface DocumentSliceType {
-  allPrivacyPolicy: PrivacyPolicyType | null;
-  allAboutUs: AboutUsType | null;
-  allTermsCondition: TermsConditionType | null;
+export interface TermsAndConditionsApiResponse extends MessageStatus {
+  data: TermsAndConditionsType;
+}
+
+export interface PrivacyPolicyType extends CommonDataType {
+  _id: string;
+  privacyPolicy: string;
+}
+
+export interface PrivacyPolicyApiResponse extends MessageStatus {
+  data: PrivacyPolicyType;
+}
+
+export interface AboutUsType extends CommonDataType {
+  _id: string;
+  aboutUs: string;
+}
+
+export interface AboutUsApiResponse extends MessageStatus {
+  data: AboutUsType;
 }

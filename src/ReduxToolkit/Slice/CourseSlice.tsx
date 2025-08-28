@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { Url_Keys } from "../../Constant";
-import { Get } from "../../Api";
+// import { Get } from "../../Api";
 import { CourseApiResponse, CourseSliceType, CourseType } from "../../Types/Course";
 import { FetchApiParams } from "../../Types/CoreComponents";
 
@@ -12,18 +12,18 @@ const initialState: CourseSliceType = {
   singleCourseData: null,
 };
 
-export const fetchCourseApiData = createAsyncThunk<CourseApiResponse, FetchApiParams>("admin/course", async ({ page, limit, search }) => {
-  let url = Url_Keys.Course.Course;
-  if (page) url += `?page=${page}&limit=${limit}`;
-  if (search) url += `&search=${search}`;
-  const response = await Get<CourseApiResponse>(url);
-  return response?.data;
-});
+// export const fetchCourseApiData = createAsyncThunk<CourseApiResponse, FetchApiParams>("admin/course", async ({ page, limit, search }) => {
+//   let url = Url_Keys.Course.Course;
+//   if (page) url += `?page=${page}&limit=${limit}`;
+//   if (search) url += `&search=${search}`;
+//   // const response = await Get<CourseApiResponse>(url);
+//   return ;
+// });
 
-export const fetchSingleCourseApiData = createAsyncThunk<CourseType, FetchApiParams>("admin/single-course", async ({ id }) => {
-  const response = await Get<CourseType>(`${Url_Keys.Course.Course}/${id}`);
-  return response?.data;
-});
+// export const fetchSingleCourseApiData = createAsyncThunk<CourseType, FetchApiParams>("admin/single-course", async ({ id }) => {
+//   // const response = await Get<CourseType>(`${Url_Keys.Course.Course}/${id}`);
+//   return ;
+// });
 
 const CourseSlice = createSlice({
   name: "Course",
@@ -37,13 +37,13 @@ const CourseSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchCourseApiData.fulfilled, (state, action) => {
-      state.allCourse = action.payload;
-      state.isLoadingCourse = false;
-    });
-    builder.addCase(fetchSingleCourseApiData.fulfilled, (state, action) => {
-      state.singleCourseData = action.payload;
-    });
+    // builder.addCase(fetchCourseApiData.fulfilled, (state, action) => {
+    //   state.allCourse = action.payload;
+    //   state.isLoadingCourse = false;
+    // });
+    // builder.addCase(fetchSingleCourseApiData.fulfilled, (state, action) => {
+    //   state.singleCourseData = action.payload;
+    // });
   },
 });
 

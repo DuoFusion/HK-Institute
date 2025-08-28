@@ -1,96 +1,54 @@
-import { yupResolver } from "@hookform/resolvers/yup";
 import { Button } from "antd";
-import { Fragment, useState } from "react";
-import { useForm } from "react-hook-form";
-import { Post } from "../../Api";
-import { Url_Keys } from "../../Constant";
-import { useAppSelector } from "../../ReduxToolkit/Hooks";
-import { ChangePasswordType } from "../../Types/Auth";
-import { ChangePasswordSchema } from "../../Utils/ValidationSchemas";
-import { Card, CardBody, Col, Container, Label, Row } from "reactstrap";
-import { Form } from "react-router-dom";
-import Breadcrumbs from "../../CoreComponents/Breadcrumbs";
+import { Form, Formik, FormikHelpers } from "formik";
+import { Card, CardBody, Col, Container, Row } from "reactstrap";
+import { Mutations } from "../../Api";
 import CommonCardHeader from "../../CoreComponents/CommonCardHeader";
+import { TextInput } from "../../CoreComponents/formFields";
+import { useAppSelector } from "../../ReduxToolkit/Hooks";
+import { ChangePasswordPayload } from "../../Types/Auth";
+import { ChangePasswordSchema } from "../../Utils/ValidationSchemas";
 
 const ChangePassword = () => {
-  const [loading, setLoading] = useState(false);
-  const { user } = useAppSelector((state) => state.auth);
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(ChangePasswordSchema),
-  });
+  const { mutate: ChangePassword, isPending } = Mutations.useChangePassword();
+  const { user } = useAppSelector((store) => store.auth);
 
-  const onSubmit = async (data: ChangePasswordType) => {
-    const changePassword = {
-      email: user?.user?.email,
-      oldPassword: data?.oldPassword,
-      newPassword: data?.newPassword,
-      confirmPassword: data?.confirmPassword,
-    };
-    try {
-      setLoading(true);
-      const response = await Post(Url_Keys.Auth.ChangePassword, changePassword);
-      if (response.status === 200) {
-        reset();
-        setLoading(false);
-      }
-    } catch (error) {}
+  const handleSubmit = async (values: ChangePasswordPayload, { resetForm }: FormikHelpers<ChangePasswordPayload>) => {
+    ChangePassword({ email: user?.user?.email, ...values }, { onSuccess: () => resetForm() });
   };
   return (
-    <Fragment>
-      <Breadcrumbs mainTitle="Change Password" parent="Pages" />
-      <Container fluid>
-        <Col md="12">
-          <Card>
-            <CommonCardHeader title="Change Password" />
-            <CardBody>
-              <div className="input-items">
-                <Form onSubmit={handleSubmit(onSubmit)}>
-                  <Row className="gy-3">
-                    <Col md="12">
-                      <div className="input-box">
-                        <Label>Old Password</Label>
-                        <input type="text" {...register("oldPassword")} placeholder="Enter Old Password" />
-                        {errors.oldPassword && <p className="text-danger">{errors.oldPassword.message}</p>}
-                      </div>
-                    </Col>
-
-                    <Col md="6">
-                      <div className="input-box">
-                        <Label>New Password</Label>
-                        <input type="text" {...register("newPassword")} placeholder="Enter New Password" />
-                        {errors.newPassword && <p className="text-danger">{errors.newPassword.message}</p>}
-                      </div>
-                    </Col>
-
-                    <Col md="6">
-                      <div className="input-box">
-                        <Label>Confirm Password</Label>
-                        <input type="text" {...register("confirmPassword")} placeholder="Enter Confirm password" />
-                        {errors.confirmPassword && <p className="text-danger">{errors.confirmPassword.message}</p>}
-                      </div>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col>
-                      <div className="text-center mt-4">
-                        <Button htmlType="submit" className="btn btn-primary" loading={loading}>
+    <Container>
+      <Col md="12">
+        <Card>
+          <CommonCardHeader title="Change Password" />
+          <CardBody>
+            <div className="input-items">
+              <Formik initialValues={{ oldPassword: "", newPassword: "", confirmPassword: "" }} validationSchema={ChangePasswordSchema} onSubmit={handleSubmit}>
+                {() => (
+                  <Form>
+                    <Row className="gy-3">
+                      <Col md="4">
+                        <TextInput name="oldPassword" label="Old Password" type="password" placeholder=" * * * * * * * * * " required />
+                      </Col>
+                      <Col md="4">
+                        <TextInput name="newPassword" label="New Password" type="password" placeholder=" * * * * * * * * * " required />
+                      </Col>
+                      <Col md="4">
+                        <TextInput name="confirmPassword" label="Confirm Password" type="password" placeholder=" * * * * * * * * * " required />
+                      </Col>
+                      <Col sm="12" className="text-center">
+                        <Button htmlType="submit" type="primary" className="btn btn-primary" size="large" loading={isPending}>
                           Save
                         </Button>
-                      </div>
-                    </Col>
-                  </Row>
-                </Form>
-              </div>
-            </CardBody>
-          </Card>
-        </Col>
-      </Container>
-    </Fragment>
+                      </Col>
+                    </Row>
+                  </Form>
+                )}
+              </Formik>
+            </div>
+          </CardBody>
+        </Card>
+      </Col>
+    </Container>
   );
 };
 

@@ -32,23 +32,6 @@ export const LoginSchema = yup.object().shape({
     .matches(/[!@#$%^&*()_+={}:;"'<>,.?/-]/, "Password must include at least one special character"),
 });
 
-export const OtpSchema = yup.object().shape({
-  email: yup.string().email("Enter a valid email address").required("Email Id is required"),
-  otp: yup
-    .number()
-    .typeError("OTP must be a number")
-    .transform((value, originalValue) => {
-      return originalValue === "" ? undefined : value;
-    }),
-});
-
-export const ResetPasswordSchema = yup.object().shape({
-  newPassword: yup
-    .string()
-    .required("Password is required")
-    .matches(/[!@#$%^&*()_+={}:;"'<>,.?/-]/, "Password must include at least one special character"),
-});
-
 export const ChangePasswordSchema = yup.object().shape({
   oldPassword: yup
     .string()

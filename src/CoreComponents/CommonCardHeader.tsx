@@ -6,7 +6,7 @@ import { CardHeaderProp } from "../Types/CoreComponents";
 
 const CommonCardHeader: FC<CardHeaderProp> = ({ title, headClass,rowClass, tagClass, setIsEditing, isEditing, Search, searchClass, btnTitle, btnClick, btnLink, typeFilter, typeFilterData }) => {
   return (
-    <CardHeader className={`card-header-box ${headClass ? headClass : "pb-0"}`}>
+    <CardHeader className={`card-header-box ${headClass ? headClass : ""}`}>
       <Form>
         <Row className={rowClass}>
           {title && (

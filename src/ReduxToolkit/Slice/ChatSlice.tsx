@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+// import { Get } from "../../Api";
 import { Url_Keys } from "../../Constant";
-import { Get } from "../../Api";
+import { ChatApiResponse, ChatSliceType } from "../../Types/Chat";
 import { FetchApiParams } from "../../Types/CoreComponents";
-import { ChatApiResponse, ChatSliceType, UserUnreadMessages } from "../../Types/Chat";
 
 const initialState: ChatSliceType = {
   isChatModal: false,
@@ -18,16 +18,11 @@ const initialState: ChatSliceType = {
   userLatestMessages: {},
 };
 
-export const fetchChatApiData = createAsyncThunk<ChatApiResponse, FetchApiParams>("admin/Chat", async ({ senderId, receiverId }) => {
-  let url = Url_Keys.Chat.Chat;
-  if (senderId) url += `?senderId=${senderId}&receiverId=${receiverId}`;
-  const response = await Get<ChatApiResponse>(url);
-  return response?.data;
-});
-
-// export const fetchSingleChatApiData = createAsyncThunk<ChatType, FetchApiParams>("admin/single-Chat", async ({ id }) => {
-//   const response = await Get<ChatType>(`${Url_Keys.Chat.Chat}/${id}`);
-//   return response?.data;
+// export const fetchChatApiData = createAsyncThunk<ChatApiResponse, FetchApiParams>("admin/Chat", async ({ senderId, receiverId }) => {
+//   let url = Url_Keys.Chat.Chat;
+//   if (senderId) url += `?senderId=${senderId}&receiverId=${receiverId}`;
+//   // const response = await Get<ChatApiResponse>(url);
+//   return {};
 // });
 
 const ChatSlice = createSlice({
@@ -75,12 +70,9 @@ const ChatSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchChatApiData.fulfilled, (state, action) => {
-      state.allChat = action.payload;
-      state.isLoadingChat = false;
-    });
-    // builder.addCase(fetchSingleChatApiData.fulfilled, (state, action) => {
-    //   state.singleChatData = action.payload;
+    // builder.addCase(fetchChatApiData.fulfilled, (state, action) => {
+    //   state.allChat = action.payload;
+    //   state.isLoadingChat = false;
     // });
   },
 });

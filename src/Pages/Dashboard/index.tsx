@@ -1,10 +1,14 @@
-import React, { Fragment } from "react";
-import Breadcrumbs from "../../CoreComponents/Breadcrumbs";
+import { Fragment } from "react";
+import Banner from "./Banner";
+import Category from "./Category";
+import Course from "./Course";
 
 const Dashboard = () => {
   return (
     <Fragment>
-      {/* <Breadcrumbs mainTitle="Dashboard" parent="Pages" /> */}
+      <Banner />
+      <Category />
+      <Course />
     </Fragment>
   );
 };

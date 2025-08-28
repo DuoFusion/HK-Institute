@@ -1,15 +1,12 @@
-import { FormEvent } from "react";
+import { FormEvent, ReactNode } from "react";
+import type { GlobalConfigProps } from "antd/es/config-provider";
+import { InputProps } from "reactstrap";
 
 export interface ApiResponse<T> {
   status: number;
   message?: string;
   data?: T;
 }
-
-export interface Params {
-  [key: string]: any;
-}
-
 export interface FetchApiParams {
   page?: number;
   limit?: number;
@@ -111,4 +108,50 @@ export interface InformationProp {
   handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
   isEditing: boolean;
   setIsEditing: (val: boolean) => void;
+}
+
+
+export type AntdNotificationType = "success" | "error" | "info" | "warning" | "open";
+
+export interface GlobalConfigPropsWithStack extends GlobalConfigProps {
+  stack?: {
+    threshold?: number;
+  };
+}
+
+
+// ************ Form/Input Fields ***********
+
+export interface TextInputProps extends InputProps {
+  label?: string;
+  name: string;
+  children?: ReactNode;
+  required?: boolean;
+  inputGroupIcon?: any;
+}
+
+// ************ Common Api Data Type ***********
+
+export interface PageState {
+  page: number;
+  limit: number;
+  page_limit: number;
+}
+
+export interface PageStatus {
+  totalData: number;
+  state: PageState;
+}
+
+export interface MessageStatus {
+  status: number;
+  message: string;
+  error: Record<string, unknown>;
+}
+
+export interface CommonDataType {
+  isDeleted?: boolean;
+  isBlocked?: boolean;
+  createdAt?: string;
+  updatedAt?: string;
 }

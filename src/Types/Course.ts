@@ -1,30 +1,24 @@
-import { SelectOption } from "./CoreComponents";
+import { CategoryType } from "./Category";
+import { CommonDataType, MessageStatus, PageStatus } from "./CoreComponents";
 
-export interface CourseType {
+export interface CourseType extends CommonDataType {
   _id: string;
   name: string;
   image: string;
   feature: boolean;
   action: boolean;
   locked: boolean;
-  categoryIds: string[];
+  categoryIds: CategoryType[];
   userIds: string[];
   priority: number;
-  isDeleted: boolean;
-  createdAt: string;
-  updatedAt: string;
 }
 
-export interface CourseState {
-  page: number;
-  limit: number;
-  page_limit: number;
-}
-
-export interface CourseApiResponse {
+export interface BannerDataResponse extends PageStatus {
   course_data: CourseType[];
-  totalData: number;
-  state: CourseState;
+}
+
+export interface CourseApiResponse extends MessageStatus {
+  data: BannerDataResponse;
 }
 
 export interface CourseSliceType {
@@ -33,15 +27,4 @@ export interface CourseSliceType {
   isLoadingCourse: boolean;
   singleEditingIdCourse: string;
   singleCourseData: CourseType;
-}
-
-export interface CourseFormData {
-  name: string;
-  image: string[];
-  action: boolean;
-  feature: boolean;
-  locked: boolean;
-  categoryIds: SelectOption[];
-  userIds: SelectOption[];
-  priority: number;
 }

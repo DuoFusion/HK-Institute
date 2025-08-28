@@ -1,3 +1,4 @@
+import { STORAGE_KEYS } from "../Constant/StorageKeys";
 import { SelectOption } from "../Types/CoreComponents";
 
 //dynamic image
@@ -13,8 +14,18 @@ export const dynamicNumber = (totalLength: number) => {
 };
 
 //get token
+// export const getToken = () => {
+//   return JSON.parse(localStorage.getItem("hk-course-admin-token"));
+// };
+
+//get token
+
+export const getStorage = () => localStorage;
+
 export const getToken = () => {
-  return JSON.parse(localStorage.getItem("hk-course-admin-token"));
+  const storage = getStorage();
+  const token = storage.getItem(STORAGE_KEYS.TOKEN);
+  return token;
 };
 
 export const generateOptions = (data?: { _id: string; name?: string; firstName?: string; lastName?: string }[]) => {

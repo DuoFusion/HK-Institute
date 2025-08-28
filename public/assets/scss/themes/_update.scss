@@ -2798,6 +2798,9 @@ body.offcanvas {
       text-transform: capitalize;
       margin-bottom: 10px;
       color: #3d3d3d;
+      .required {
+        color: #d62131;
+      }
     }
 
     input {
@@ -2817,6 +2820,25 @@ body.offcanvas {
       &:disabled {
         background-color: var(--bs-secondary-bg);
         color: #6e6e6f;
+      }
+    }
+    .show-hide {
+      position: absolute;
+      top: 53px;
+      right: 30px;
+      transform: translateY(-50%);
+      span {
+        cursor: pointer;
+        font-size: 13px;
+        color: var(--theme-default);
+        &.show {
+          &:before {
+            content: "show";
+          }
+        }
+        &:before {
+          content: "hide";
+        }
       }
     }
     .quill {
@@ -3233,18 +3255,18 @@ nextjs-portal {
   object-position: center;
   aspect-ratio: 0.703704;
 }
-:where(.css-dev-only-do-not-override-7t2xvq).ant-btn-variant-outlined:not(:disabled):not(.ant-btn-disabled):hover {
+.ant-btn-variant-outlined:not(:disabled):not(.ant-btn-disabled):hover {
   color: #ffffff !important;
 }
 .ant-image-preview-wrap {
   z-index: 2000 !important;
 }
-:where(.css-dev-only-do-not-override-7t2xvq).ant-btn-variant-solid:not(:disabled):not(.ant-btn-disabled):hover,
-:where(.css-dev-only-do-not-override-7t2xvq).ant-btn-variant-solid:not(:disabled):not(.ant-btn-disabled):active {
+.ant-btn-variant-solid:not(:disabled):not(.ant-btn-disabled):hover,
+.ant-btn-variant-solid:not(:disabled):not(.ant-btn-disabled):active {
   background: var(--theme-default);
   color: #fff;
 }
-:where(.css-dev-only-do-not-override-7t2xvq).ant-btn-variant-outlined:not(:disabled):not(.ant-btn-disabled):hover {
+.ant-btn-variant-outlined:not(:disabled):not(.ant-btn-disabled):hover {
   color: #000000 !important;
   border-color: var(--theme-default);
 }

@@ -2,7 +2,7 @@ import { Fragment, useCallback, useEffect } from "react";
 import { Container, Row } from "reactstrap";
 import Breadcrumbs from "../../CoreComponents/Breadcrumbs";
 import { useAppDispatch } from "../../ReduxToolkit/Hooks";
-import { fetchStudentsApiData } from "../../ReduxToolkit/Slice/StudentsSlice";
+// import { fetchStudentsApiData } from "../../ReduxToolkit/Slice/StudentsSlice";
 import ChatWindow from "./ChatWindow";
 import Sidebar from "./Sidebar";
 

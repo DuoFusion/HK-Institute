@@ -14,7 +14,7 @@ const Sidebar = () => {
 
   const dispatch = useAppDispatch();
 
-  const { allStudents } = useAppSelector((state) => state.students);
+  // const { allStudents } = useAppSelector((state) => state.students);
   const { user } = useAppSelector((state) => state.auth);
   const { selectedUser, userUnreadCounts, userLatestMessages, isChatSearchData } = useAppSelector((state) => state.chat);
 
@@ -77,16 +77,16 @@ const Sidebar = () => {
     };
 
     // Get latest messages for all users
-    if (currentUserId && allStudents?.user_data) {
-      allStudents?.user_data
-        .filter((x: any) => x._id !== currentUserId)
-        .forEach((user: any) => {
-          socket.emit("get_latest_message", {
-            senderId: user._id,
-            receiverId: currentUserId,
-          });
-        });
-    }
+    // if (currentUserId && allStudents?.user_data) {
+    //   allStudents?.user_data
+    //     .filter((x: any) => x._id !== currentUserId)
+    //     .forEach((user: any) => {
+    //       socket.emit("get_latest_message", {
+    //         senderId: user._id,
+    //         receiverId: currentUserId,
+    //       });
+    //     });
+    // }
 
     socket.on("latest_message_response", ({ senderId, message }) => {
       if (message) {
@@ -111,7 +111,7 @@ const Sidebar = () => {
       socket.off("latest_message_response");
       socket.off("receive_message");
     };
-  }, [dispatch, currentUserId, allStudents?.user_data, userUnreadCounts, isChatSearchData]);
+  }, [dispatch, currentUserId, userUnreadCounts, isChatSearchData]);
 
   useEffect(() => {
     if (currentUserId) {

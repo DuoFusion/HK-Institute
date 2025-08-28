@@ -3,13 +3,13 @@ import { ArrowDown2 } from "iconsax-react";
 import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
 import { IoCheckmarkDone } from "react-icons/io5";
 import { Button, Card, Col, Form } from "reactstrap";
-import { Post } from "../../Api";
+// import { Post } from "../../Api";
 import { Url_Keys } from "../../Constant";
 import { Image } from "../../CoreComponents/Image";
 import SvgIcon from "../../CoreComponents/SvgIcon";
 import { useAppDispatch, useAppSelector } from "../../ReduxToolkit/Hooks";
 import { addUserUnreadMessage, setSelectUser, setUserUnreadCount } from "../../ReduxToolkit/Slice/ChatSlice";
-import { fetchStudentsApiData } from "../../ReduxToolkit/Slice/StudentsSlice";
+// import { fetchStudentsApiData } from "../../ReduxToolkit/Slice/StudentsSlice";
 import socket from "../../socket";
 import { Chat } from "../../Types/Chat";
 import { dynamicImage } from "../../Utils";
@@ -32,7 +32,7 @@ const ChatWindow = () => {
   const receiver = selectedUser?._id;
 
   const getAllStudents = useCallback(() => {
-    dispatch(fetchStudentsApiData({ blockFilter: "unblock" }));
+    // dispatch(fetchStudentsApiData({ blockFilter: "unblock" }));
   }, [dispatch]);
 
   // Helper function to mark messages as seen with throttling
@@ -229,11 +229,11 @@ const ChatWindow = () => {
   };
 
   const handleBlockStudent = async () => {
-    const res = await Post(Url_Keys.Students.Edit, { id: selectedUser?._id, isBlocked: true });
-    if (res?.status === 200) {
-      getAllStudents();
-      dispatch(setSelectUser(null));
-    }
+    // const res = await Post(Url_Keys.Students.Edit, { id: selectedUser?._id, isBlocked: true });
+    // if (res?.status === 200) {
+    //   getAllStudents();
+    //   dispatch(setSelectUser(null));
+    // }
   };
 
   return (

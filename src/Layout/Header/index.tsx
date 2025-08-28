@@ -24,119 +24,88 @@ const Header = () => {
   const dispatch = useAppDispatch();
 
   return (
-    <>
-      <div className={`page-header ${sideBarToggle ? "close_icon" : ""}`}>
-        <Row className="header-wrapper m-0">
-          <Col  xl="4" lg="3" className="header-logo-wrapper p-0 col-auto">
-            <div className="logo-wrapper">
-              <Link to={RouteList.Dashboard}>
-                <Image className="img-fluid for-light" src={dynamicImage(`logo/logo.png`)} alt="" />
-              </Link>
-            </div>
-            <div className="toggle-sidebar" onClick={() => dispatch(toggleSidebar())}>
-              <SvgIcon className="sidebar-toggle" iconId="stroke-animation" />
-            </div>
-          </Col>
-          <Col xl="5" lg="7" className="d-none d-lg-block">
-            <div className="left-header p-0">
-              <div className="left-menu-header">
-                <ul className="header-left">
-                  {MenuList.map((mainMenu, index) => (
-                    <li className={`onhover-dropdown ${index === 4 ? " p-0" : ""}`} key={index}>
-                      <span className="f-w-700">{mainMenu.title} </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </Col>
-          <Col xs="auto" xl="3" lg="2" sm="5" className="nav-right box-col-6 pull-right right-header p-0 ms-auto">
-            <ul className="nav-menus">
-              <li onClick={() => fullScreenHandler(!fullScreen)}>
-                <NavLink href={Href}>
-                  <Maximize2 />
-                </NavLink>
-              </li>
-              <li className="profile-nav onhover-dropdown p-0 m-0">
-                <div className="d-flex profile-media align-items-center">
-                  <Image className="b-r-6 img-40" src={user?.user?.profilePhoto ? user?.user?.profilePhoto : dynamicImage(`user/user.png`)} alt="profile" />
-                  <div className="flex-grow-1">
-                    <span>
-                      {user?.user?.firstName} {user?.user?.lastName}
-                    </span>
-                    <p className="mb-0 text-capitalize">
-                      {user?.user?.userType}
-                      <SvgIcon iconId="header-arrow-down" />
-                    </p>
-                  </div>
-                </div>
-                <ul className="profile-dropdown onhover-show-div">
-                  <li>
-                    <Link to={RouteList.ChangePassword}>
-                      <span>Change Password</span>
-                    </Link>
-                  </li>
-                  <li onClick={() => dispatch(logout())}>
-                    <Link to={Href}>
-                      <span>LogOut</span>
-                    </Link>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </Col>
-        </Row>
-      </div>
-      {/* <div className={`page-header ${sideBarToggle ? "close_icon" : ""}`}>
-      <div className="header-wrapper m-0">
-        <div className="header-logo-wrapper p-0">
+    <div className={`page-header ${sideBarToggle ? "close_icon" : ""}`}>
+      <Row className="header-wrapper m-0">
+        <Col xl="3" lg="2" className="header-logo-wrapper p-0 col-auto">
           <div className="logo-wrapper">
-            <Link to={RouteList.Home}>
-              <img className="img-fluid main-logo" src="assets/images/logo/1.png" alt="logo" />
-              <img className="img-fluid white-logo" src="assets/images/logo/1-white.png" alt="logo" />
+            <Link to={RouteList.Dashboard}>
+              <Image className="img-fluid for-light" src={user?.user?.image ?? dynamicImage(`logo/logo.png`)} alt="" />
             </Link>
           </div>
-          <div className="toggle-sidebar">
-            <AlignCenter className="status_toggle middle sidebar-toggle" onClick={() => dispatch(toggleSidebar())} />
-            <Link to={RouteList.Home}>
-              <img className="img-fluid for-light" src="assets/images/logo/1.png" alt="logo" />
-              <img className="img-fluid for-dark" src="assets/images/logo/1-white.png" alt="logo" />
-            </Link>
+          <div className="toggle-sidebar" onClick={() => dispatch(toggleSidebar())}>
+            <SvgIcon className="sidebar-toggle" iconId="stroke-animation" />
           </div>
-        </div>
-        <div className="nav-right col-xl-6 col-5 pull-right right-header p-0">
+        </Col>
+        <Col xl="6" lg="8" className="d-none d-lg-block">
+          <div className="left-header p-0 justify-content-center">
+            <div className="left-menu-header">
+              <ul className="header-left">
+                {MenuList.map((mainMenu, index) => (
+                  <li className={`onhover-dropdown ${index === 4 ? " p-0" : ""}`} key={index}>
+                    <span className="f-w-700"><Link to={mainMenu.url} >{mainMenu.title}</Link></span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </Col>
+        <Col xs="auto" xl="3" lg="2" sm="5" className="nav-right box-col-6 pull-right right-header p-0 ms-auto">
           <ul className="nav-menus">
-            <li className="profile-nav onhover-dropdown pe-0 me-0">
-              <div className="media profile-media">
-                <img className="user-profile rounded-circle" src="assets/images/users/4.jpg" alt="" />
-                <div className="user-name-hide media-body">
-                  <span>Emay Walter</span>
-                  <p className="mb-0 font-roboto">
-                    Admin
-                    <i className="middle ri-arrow-down-s-line" />
+            {/* <li onClick={() => fullScreenHandler(!fullScreen)}>
+              <NavLink href={Href}>
+                <Maximize2 />
+              </NavLink>
+            </li> */}
+            <li className="profile-nav onhover-dropdown p-0 m-0">
+              <div className="d-flex profile-media align-items-center">
+                <Image className="b-r-6 img-40" src={user?.user?.profilePhoto ? user?.user?.profilePhoto : dynamicImage(`user/user.png`)} alt="profile" />
+                <div className="flex-grow-1">
+                  <span>
+                    {user?.user?.firstName} {user?.user?.lastName}
+                  </span>
+                  <p className="mb-0 text-capitalize">
+                    {user?.user?.email}
+                    <SvgIcon iconId="header-arrow-down" />
                   </p>
                 </div>
               </div>
               <ul className="profile-dropdown onhover-show-div">
                 <li>
+                  <Link to={RouteList.Setting}>
+                    <span>Setting</span>
+                  </Link>
+                </li>
+                <li>
                   <Link to={RouteList.ChangePassword}>
-                    <Settings/>
                     <span>Change Password</span>
                   </Link>
                 </li>
-                <li onClick={() =>  dispatch(logout())}>
-                  <a href={Href}>
-                    <LogOut/>
-                    <span>Log out</span>
-                  </a>
+                <li>
+                  <Link to={RouteList.AboutUs}>
+                    <span>About Us</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link to={RouteList.PrivacyPolicy}>
+                    <span>Privacy Policy</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link to={RouteList.TermsAndConditions}>
+                    <span>Terms & Condition</span>
+                  </Link>
+                </li>
+                <li onClick={() => dispatch(logout())}>
+                  <Link to={Href}>
+                    <span>LogOut</span>
+                  </Link>
                 </li>
               </ul>
             </li>
           </ul>
-        </div>
-      </div>
-    </div> */}
-    </>
+        </Col>
+      </Row>
+    </div>
   );
 };
 

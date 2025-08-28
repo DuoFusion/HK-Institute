@@ -1,0 +1,176 @@
+.category-swiper {
+  padding: 20px 0;
+}
+
+.wg-offer {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  //   background: #fff;
+  //   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.wg-offer:hover {
+  transform: translateY(-10px);
+}
+.wg-offer .image{
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.wg-offer .image img {
+  width: 100%;
+  //   height: 250px;
+  overflow: hidden;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.4s ease;
+}
+
+.wg-offer:hover .image img {
+    transform: scale(1.05);
+}
+
+.wg-offer .content {
+  padding: 15px 10px;
+}
+
+.wg-offer .box-title .link {
+  color: #222;
+  font-size: 20px;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.wg-offer .box-title .link:hover {
+  color: #6c4e2a;
+}
+
+.wg-offer p {
+  margin: 5px 0 0;
+  font-size: 16px;
+  color: #777;
+}
+
+/* Swiper navigation buttons */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #6c4e2a;
+  transition: 0.3s;
+}
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  color: #533b20;
+}
+
+/* Swiper pagination */
+.swiper-pagination-bullet {
+  background: #6c4e2a;
+  opacity: 0.4;
+}
+.swiper-pagination-bullet-active {
+  opacity: 1;
+}
+
+.flat-spacing {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+@media (max-width: 1024px) {
+  .flat-spacing {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+}
+
+@media (max-width: 767px) {
+  .flat-spacing {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+}
+
+/* Overlay Button */
+.cls-btn {
+  position: absolute;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+
+.wg-offer:hover .cls-btn {
+  opacity: 1;
+  bottom: 100px;
+}
+
+.tf-btn {
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 8px 20px;
+  border-radius: 30px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #000;
+}
+
+.tf-btn:hover {
+  background: #6c4e2a;
+  color: #fff;
+  border-color: #6c4e2a;
+}
+
+/* ===== Section Title Styling ===== */
+.flat-title {
+  text-align: center;
+  margin-bottom: 40px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.flat-title .title {
+  font-size: 36px;
+  line-height: 1.2;
+  font-weight: 600 !important;
+  color: #222;
+  margin-bottom: 15px;
+}
+
+.flat-title .desc {
+  font-size: 18px;
+  color: #666;
+  line-height: 1.6;
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .flat-title .title {
+    font-size: 28px;
+  }
+  .flat-title .desc {
+    font-size: 16px;
+  }
+   .flat-title{
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 767px) {
+  .flat-title .title {
+    font-size: 24px;
+  }
+  .flat-title .desc {
+    font-size: 15px;
+  }
+  .flat-title{
+    margin-bottom: 5px;
+  }
+}
