@@ -1,75 +1,59 @@
-import { Spin } from "antd";
-import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Queries } from "../../Api";
-import { RouteList } from "../../Constant";
-import { Link } from "react-router-dom";
+
+export const AboutCourseSliderSetting = {
+  spaceBetween: 24,
+  slidesPerView: 1,
+  loop: true,
+  breakpoints: {
+    640: { slidesPerView: 2, spaceBetween: 20 },
+    1024: { slidesPerView: 3, spaceBetween: 24 },
+  },
+};
 
 const Course = () => {
-  const { data: Category, isLoading } = Queries.useGetCategory({});
-  const CategoryData = Category?.data;
+  const { data: Course, isLoading } = Queries.useGetCourse({ featureFilter: true, actionFilter: true, lockFilter: true });
+  const CourseData = Course?.data;
 
   return (
-    <div className="flat-spacing">
-      {isLoading ? (
-        <div className="text-center">
-          <Spin />
-        </div>
-      ) : (
-        CategoryData?.category_data?.length > 0 && (
-          <section className="pt-0">
-            {/* Section Title */}
-            <div className="flat-title wow fadeInUp">
-              <div className="title display-lg-3 fw-normal">Course</div>
-              <p className="desc text-main text-md">Discover expert advice, style inspiration, and product updates on our blog.</p>
+      <section className="row_am pricing_section white_text">
+        {isLoading ? (
+          <></>
+        ) : (
+          CourseData?.course_data?.length > 0 && (
+            <div className="pricing_inner">
+              {/* container start */}
+              <div className="container">
+                <div className="section_title">
+                  <span className="title_badge">Courses</span>
+                  <h2>Your Courses</h2>
+                </div>
+
+                {/* Pricing Plans */}
+                <div className="pricing_pannel">
+                  <Swiper {...AboutCourseSliderSetting} className="courses-swiper">
+                    {CourseData?.course_data?.map((item, index) => (
+                      <SwiperSlide key={index}>
+                        <div className={`pannel_block ${index % 2 ? "highlited_block" : ""}`}>
+                          <div className="image d-block img-style">
+                            <img src={item.image ?? ""} alt={item.name} className="lazyload" />
+                          </div>
+                          <div className="heading">
+                            <h3>{item.name}</h3>
+                          </div>
+                        </div>
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                </div>
+                <div className="text-center view-all">
+                  <button className="tf-btn btn-white">View all</button>
+                </div>
+              </div>
             </div>
-
-            {/* Category Swiper */}
-            <div className="container">
-              <Swiper
-                modules={[Pagination]}
-                spaceBetween={24}
-                slidesPerView={1}
-                loop
-                pagination={{ clickable: true }}
-                breakpoints={{
-                  640: { slidesPerView: 2, spaceBetween: 20 },
-                  1024: { slidesPerView: 3, spaceBetween: 24 },
-                }}
-                className="category-swiper"
-              >
-                {CategoryData?.category_data?.map((cat, idx) => (
-                  <SwiperSlide key={idx}>
-                    <div className="wg-offer hover-img">
-                      <Link to={RouteList.Category}>
-                        {/* Image */}
-                        <div className="image d-block img-style">
-                          <img src={cat.image} alt={cat.name} className="lazyload" />
-                        </div>
-
-                        {/* Overlay Button */}
-                        <div className="cls-btn text-center">
-                          <button className="tf-btn btn-white hover-dark">View all</button>
-                        </div>
-                      </Link>
-
-                      {/* Title */}
-                      <div className="content text-center">
-                        <div className="box-title gap-4">
-                          <Link to={RouteList.Category} className="link text-xl fw-medium">
-                            {cat.name}
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            </div>
-          </section>
-        )
-      )}
-    </div>
+          )
+        )}
+      </section>
   );
 };
 

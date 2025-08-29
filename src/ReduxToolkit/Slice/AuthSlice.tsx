@@ -18,7 +18,7 @@ const AuthSlice = createSlice({
       localStorage.removeItem(STORAGE_KEYS.USER);
       localStorage.removeItem(STORAGE_KEYS.TOKEN);
       state.user = null;
-      state.isAuthenticated = true;
+      state.isAuthenticated = false;
     },
   },
 });

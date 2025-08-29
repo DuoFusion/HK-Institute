@@ -1,7 +1,5 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Col, NavLink, Row } from "reactstrap";
-import { Href } from "../../Constant";
+import { Col, Row } from "reactstrap";
 import { RouteList } from "../../Constant/RouteList";
 import { Image } from "../../CoreComponents/Image";
 import SvgIcon from "../../CoreComponents/SvgIcon";
@@ -9,18 +7,19 @@ import { useAppDispatch, useAppSelector } from "../../ReduxToolkit/Hooks";
 import { logout } from "../../ReduxToolkit/Slice/AuthSlice";
 import { toggleSidebar } from "../../ReduxToolkit/Slice/LayoutSlice";
 import { dynamicImage } from "../../Utils";
-import { Maximize2 } from "iconsax-react";
+// import { Maximize2 } from "iconsax-react";
 import { MenuList } from "../../Data/SidebarMenuList";
 
 const Header = () => {
   const { sideBarToggle } = useAppSelector((state) => state.layout);
   const { user } = useAppSelector((state) => state.auth);
-  const [fullScreen, setFullScreen] = useState(false);
-  const fullScreenHandler = (isFullScreen: boolean) => {
-    setFullScreen(isFullScreen);
-    if (isFullScreen) document.documentElement.requestFullscreen();
-    else document?.exitFullscreen();
-  };
+  // const [fullScreen, setFullScreen] = useState(false);
+
+  // const fullScreenHandler = (isFullScreen: boolean) => {
+  //   setFullScreen(isFullScreen);
+  //   if (isFullScreen) document.documentElement.requestFullscreen();
+  //   else document?.exitFullscreen();
+  // };
   const dispatch = useAppDispatch();
 
   return (
@@ -29,7 +28,7 @@ const Header = () => {
         <Col xl="3" lg="2" className="header-logo-wrapper p-0 col-auto">
           <div className="logo-wrapper">
             <Link to={RouteList.Dashboard}>
-              <Image className="img-fluid for-light" src={user?.user?.image ?? dynamicImage(`logo/logo.png`)} alt="" />
+              <Image className="img-fluid for-light" src={dynamicImage(`logo/logo.png`)} alt="" />
             </Link>
           </div>
           <div className="toggle-sidebar" onClick={() => dispatch(toggleSidebar())}>
@@ -58,7 +57,7 @@ const Header = () => {
             </li> */}
             <li className="profile-nav onhover-dropdown p-0 m-0">
               <div className="d-flex profile-media align-items-center">
-                <Image className="b-r-6 img-40" src={user?.user?.profilePhoto ? user?.user?.profilePhoto : dynamicImage(`user/user.png`)} alt="profile" />
+                <Image className="b-r-6 img-40" src={user?.user?.image ?? dynamicImage(`user/user.png`)} alt="profile" />
                 <div className="flex-grow-1">
                   <span>
                     {user?.user?.firstName} {user?.user?.lastName}
@@ -96,7 +95,7 @@ const Header = () => {
                   </Link>
                 </li>
                 <li onClick={() => dispatch(logout())}>
-                  <Link to={Href}>
+                  <Link to={RouteList.Login}>
                     <span>LogOut</span>
                   </Link>
                 </li>

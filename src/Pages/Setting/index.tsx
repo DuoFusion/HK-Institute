@@ -3,7 +3,7 @@ import { Form, Formik, FormikHelpers } from "formik";
 import { Card, CardBody, Col, Container, Row } from "reactstrap";
 import { Mutations } from "../../Api";
 import CommonCardHeader from "../../CoreComponents/CommonCardHeader";
-import { TextInput } from "../../CoreComponents/formFields";
+import { ImageUpload, TextInput } from "../../CoreComponents/formFields";
 import { useAppSelector } from "../../ReduxToolkit/Hooks";
 import { ChangePasswordPayload } from "../../Types/Auth";
 import { ChangePasswordSchema } from "../../Utils/ValidationSchemas";
@@ -26,6 +26,9 @@ const Setting = () => {
                 {() => (
                   <Form>
                     <Row className="gy-3">
+                      <Col md="12">
+                       <ImageUpload name="image" label="Image" isListType="picture-circle" required />
+                      </Col>
                       <Col md="4">
                         <TextInput name="oldPassword" label="Old Password" type="password" placeholder=" * * * * * * * * * " required />
                       </Col>

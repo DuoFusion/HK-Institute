@@ -9,10 +9,10 @@ export interface CategoryType extends CommonDataType {
   priority: number;
 }
 
-export interface BannerDataResponse extends PageStatus {
+export interface CategoryDataResponse extends PageStatus {
   category_data: CategoryType[];
 }
 
 export interface CategoryApiResponse extends MessageStatus {
-  data: BannerDataResponse;
+  data: CategoryDataResponse;
 }

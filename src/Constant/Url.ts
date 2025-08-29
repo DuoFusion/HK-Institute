@@ -1,4 +1,3 @@
-import { Category } from "iconsax-react";
 
 export const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -12,6 +11,10 @@ const URL = {
   TermsAndConditions: "/terms-condition",
   Banner: "/banner",
   Category: "/category",
+  Course: "/course",
+  Blog: "/blog",
+  LatestNews: "/latest-news",
+  Faq: "/faq",
 } as const;
 
 type UrlMap = typeof URL;

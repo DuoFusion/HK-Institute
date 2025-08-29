@@ -1,6 +1,8 @@
 import { FormEvent, ReactNode } from "react";
 import type { GlobalConfigProps } from "antd/es/config-provider";
 import { InputProps } from "reactstrap";
+import { GetProp, UploadProps } from "antd";
+import { UploadListType } from "antd/es/upload/interface";
 
 export interface ApiResponse<T> {
   status: number;
@@ -154,4 +156,24 @@ export interface CommonDataType {
   isBlocked?: boolean;
   createdAt?: string;
   updatedAt?: string;
+}
+
+// ************ Upload ***********
+
+export interface UploadResponse {
+  data: string;
+  error: Record<string, unknown>;
+  message: string;
+  status: number;
+}
+
+export type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
+
+export interface ImageUploadProps {
+  multiple?: boolean;
+  name?: string;
+  accept?: string;
+  isListType?: UploadListType;
+  label?: string;
+  required?: boolean;
 }

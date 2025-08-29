@@ -1,6 +1,7 @@
 import { KEYS, Url_Keys } from "../Constant";
-import { AboutUsApiResponse, BannerApiResponse, Params, PrivacyPolicyApiResponse, TermsAndConditionsApiResponse } from "../Types";
-import { CategoryApiResponse } from "../Types/Category";
+import { AboutUsApiResponse, BannerApiResponse, BlogApiResponse, CategoryApiResponse, CourseApiResponse, Params, PrivacyPolicyApiResponse, TermsAndConditionsApiResponse } from "../Types";
+import { FaqApiResponse } from "../Types/Faq";
+import { LatestNewsApiResponse } from "../Types/LatestNews";
 import Get from "./Get";
 import { useApiGet } from "./hooks";
 
@@ -20,6 +21,18 @@ const Queries = {
 
   // ************ Category ***********
   useGetCategory: (params: Params) => useApiGet<CategoryApiResponse>([KEYS.CATEGORY, params], () => Get(Url_Keys.Category, params)),
+
+  // ************ Course ***********
+  useGetCourse: (params: Params) => useApiGet<CourseApiResponse>([KEYS.COURSE, params], () => Get(Url_Keys.Course, params)),
+
+  // ************ Blog ***********
+  useGetBlog: (params: Params) => useApiGet<BlogApiResponse>([KEYS.BLOG, params], () => Get(Url_Keys.Blog, params)),
+
+  // ************ Latest News ***********
+  useGetLatestNews: (params: Params) => useApiGet<LatestNewsApiResponse>([KEYS.LATEST_NEWS, params], () => Get(Url_Keys.LatestNews, params)),
+
+    // ************ Faq ***********
+  useGetFaq: () => useApiGet<FaqApiResponse>([KEYS.FAQ], () => Get(Url_Keys.Faq)),
 };
 
 export default Queries;

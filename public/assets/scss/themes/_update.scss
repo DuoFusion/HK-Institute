@@ -3317,3 +3317,8 @@ nextjs-portal {
     min-height: 100% !important;
   }
 }
+
+  .text-primary {
+    color: $primary-color !important;
+    stroke: $primary-color !important;
+  }

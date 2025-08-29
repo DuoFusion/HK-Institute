@@ -1,12 +1,10 @@
-export interface FaqType {
+import { CommonDataType, MessageStatus, PageStatus } from "./CoreComponents";
+
+export interface FaqType extends CommonDataType{
   _id: string;
   question: string;
   answer: string;
   priority: number;
-  isDeleted: boolean;
-  isBlocked: boolean;
-  createdAt: string;
-  updatedAt: string;
 }
 
 export interface FaqState {
@@ -15,22 +13,10 @@ export interface FaqState {
   page_limit: number;
 }
 
-export interface FaqApiResponse {
+export interface FaqResponse extends PageStatus {
   faq_data: FaqType[];
-  totalData: number;
-  state: FaqState;
 }
 
-export interface FaqSliceType {
-  isAddFaqModal: boolean;
-  allFaq: FaqApiResponse;
-  isLoadingFaq: boolean;
-  isFaqSearchData: string;
-  singleEditingFaq: FaqType;
-}
-
-export interface AddFaqModalType {
-  isEdit: boolean;
-  setEdit: (isEdit: boolean) => void;
-  getAllFaq: () => void;
+export interface FaqApiResponse extends MessageStatus{
+  data: FaqResponse;
 }

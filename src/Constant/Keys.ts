@@ -5,6 +5,10 @@ export const KEYS = {
   ABOUT_US: "about-us",
   PRIVACY_POLICY: "privacy-policy",
   TERMS_AND_CONDITIONS: "terms-and-conditions",
-  BANNER:"banner",
-  CATEGORY:"category",
+  BANNER: "banner",
+  CATEGORY: "category",
+  COURSE: "course",
+  BLOG: "blog",
+  LATEST_NEWS: "latest-news",
+  FAQ: "faq",
 } as const;

@@ -2,8 +2,8 @@
 @import "utils/variables";
 
 :root {
-    --theme-default: rgb(204, 162, 112); 
-    --theme-secondary: rgb(192, 98, 64);
+    --theme-default: rgb(34, 36, 41,1); 
+    --theme-secondary: rgb(169, 199, 67,1);
     --light-background: rgba(242, 243, 247, 0.7);
     --body-font-color: #86909C;
     --chart-border: #F5F5F5; 
@@ -225,6 +225,7 @@ body.dark-only.box-layout {
 @import "pages/track-order";
 @import "pages/banner";
 @import "pages/category";
+@import "pages/course";
 
 /* ---------------------
 	*** themes ***

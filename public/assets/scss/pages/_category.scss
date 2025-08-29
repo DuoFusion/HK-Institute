@@ -14,7 +14,7 @@
 .wg-offer:hover {
   transform: translateY(-10px);
 }
-.wg-offer .image{
+.wg-offer .image {
   overflow: hidden;
   border-radius: 12px;
 }
@@ -29,7 +29,7 @@
 }
 
 .wg-offer:hover .image img {
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
 
 .wg-offer .content {
@@ -120,9 +120,8 @@
 }
 
 .tf-btn:hover {
-  background: #6c4e2a;
-  color: #fff;
-  border-color: #6c4e2a;
+  background: #fff;
+  transform: scale(1.05);
 }
 
 /* ===== Section Title Styling ===== */
@@ -158,7 +157,7 @@
   .flat-title .desc {
     font-size: 16px;
   }
-   .flat-title{
+  .flat-title {
     margin-bottom: 15px;
   }
 }
@@ -170,7 +169,7 @@
   .flat-title .desc {
     font-size: 15px;
   }
-  .flat-title{
+  .flat-title {
     margin-bottom: 5px;
   }
 }

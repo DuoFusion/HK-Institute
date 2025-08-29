@@ -13,18 +13,11 @@ export interface CourseType extends CommonDataType {
   priority: number;
 }
 
-export interface BannerDataResponse extends PageStatus {
+export interface CourseDataResponse extends PageStatus {
   course_data: CourseType[];
 }
 
 export interface CourseApiResponse extends MessageStatus {
-  data: BannerDataResponse;
+  data: CourseDataResponse;
 }
 
-export interface CourseSliceType {
-  isCourseModal: boolean;
-  allCourse: CourseApiResponse;
-  isLoadingCourse: boolean;
-  singleEditingIdCourse: string;
-  singleCourseData: CourseType;
-}

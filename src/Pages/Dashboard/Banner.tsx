@@ -1,4 +1,3 @@
-import { Spin } from "antd";
 import { EffectFade, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Queries } from "../../Api";
@@ -9,9 +8,7 @@ const Banner = () => {
   return (
     <div className="banner-container">
       {isLoading ? (
-        <div className="text-center">
-          <Spin />
-        </div>
+        <></>
       ) : (
         bannerData?.banner_data?.length > 0 && (
           <Swiper modules={[Pagination, EffectFade]} loop effect={"fade"} rewind={true} speed={800} pagination={{ clickable: true }} className="banner-swiper">

@@ -1,3 +1,4 @@
 import TextInput from "./TextInput";
+import ImageUpload from "./ImageUpload";
 
-export { TextInput };
+export { TextInput, ImageUpload };

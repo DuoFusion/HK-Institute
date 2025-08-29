@@ -1,20 +1,17 @@
-import { Spin } from "antd";
+import { Link } from "react-router-dom";
 import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Queries } from "../../Api";
 import { RouteList } from "../../Constant";
-import { Link } from "react-router-dom";
 
 const Category = () => {
-  const { data: Category, isLoading } = Queries.useGetCategory({featureFilter:true});
+  const { data: Category, isLoading } = Queries.useGetCategory({ featureFilter: true, actionFilter: true });
   const CategoryData = Category?.data;
 
   return (
     <div className="flat-spacing">
       {isLoading ? (
-        <div className="text-center">
-          <Spin />
-        </div>
+        <></>
       ) : (
         CategoryData?.category_data?.length > 0 && (
           <section className="pt-0">
@@ -48,9 +45,6 @@ const Category = () => {
                         </div>
 
                         {/* Overlay Button */}
-                        <div className="cls-btn text-center">
-                          <button className="tf-btn btn-white hover-dark">View all</button>
-                        </div>
                       </Link>
 
                       {/* Title */}
@@ -65,6 +59,9 @@ const Category = () => {
                   </SwiperSlide>
                 ))}
               </Swiper>
+            </div>
+            <div className="text-center">
+              <button className="tf-btn btn-white">View all</button>
             </div>
           </section>
         )
