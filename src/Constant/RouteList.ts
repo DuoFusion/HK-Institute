@@ -4,7 +4,6 @@ export const RouteList = {
   ChangePassword: `/change-password`,
 
   Dashboard: `/dashboard`,
-  Banner: `/banner`,
   Setting: `/Setting`,
   Category: "/category",
   Course: "/course",

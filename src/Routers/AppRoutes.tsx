@@ -1,11 +1,8 @@
 import { RouteList } from "../Constant/RouteList";
 import AboutUs from "../Pages/AboutUs";
 import ChangePassword from "../Pages/Auth/ChangePassword";
-// import Banner from "../Pages/Banner";
-// import Blog from "../Pages/Blog";
-// import Category from "../Pages/Category";
+import Blog from "../Pages/Blog";
 import Chats from "../Pages/Chats";
-// import Course from "../Pages/Course";
 import Dashboard from "../Pages/Dashboard";
 import PrivacyPolicy from "../Pages/PrivacyPolicy";
 import Setting from "../Pages/Setting";
@@ -25,4 +22,5 @@ export const AppRoutes = [
   { path: RouteList.AboutUs, element: <AboutUs /> },
   { path: RouteList.PrivacyPolicy, element: <PrivacyPolicy /> },
   { path: RouteList.TermsAndConditions, element: <TermsAndConditions /> },
+  { path: RouteList.Blog, element: <Blog /> },
 ];

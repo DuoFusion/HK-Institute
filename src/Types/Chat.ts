@@ -1,4 +1,3 @@
-import { StudentsType } from "./Students";
 
 type UserRole = "admin" | "user";
 
@@ -35,7 +34,7 @@ export interface ChatSliceType {
   isLoadingChat: boolean;
   singleEditingIdChat: Chat;
   singleChatData: Chat;
-  selectedUser: StudentsType;
+  selectedUser: any;
   isChatSearchData: string;
   unreadCount: number;
   userUnreadCounts: Record<string, number>;

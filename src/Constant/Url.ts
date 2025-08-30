@@ -1,4 +1,3 @@
-
 export const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const URL = {
@@ -15,6 +14,11 @@ const URL = {
   Blog: "/blog",
   LatestNews: "/latest-news",
   Faq: "/faq",
+  User: "/user",
+  SettingEdit: "/user/edit",
+  Upload: {
+    Add: "/upload",
+  },
 } as const;
 
 type UrlMap = typeof URL;

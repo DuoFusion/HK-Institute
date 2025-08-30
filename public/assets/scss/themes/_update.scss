@@ -3318,7 +3318,18 @@ nextjs-portal {
   }
 }
 
-  .text-primary {
-    color: $primary-color !important;
-    stroke: $primary-color !important;
+.text-primary {
+  color: $primary-color !important;
+  stroke: $primary-color !important;
+}
+
+.profile-image {
+  .ant-upload-list-picture-circle {
+    justify-content: center;
+
+    .ant-upload-list-item-container {
+      width: 125px !important;
+      height: 125px !important;
+    }
   }
+}

@@ -6,3 +6,7 @@ export * from "./Banner";
 export * from "./Course";
 export * from "./Category";
 export * from "./Blog";
+export * from "./Faq";
+export * from "./LatestNews";
+export * from "./Setting";
+export * from "./Blog";

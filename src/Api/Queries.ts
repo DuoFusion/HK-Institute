@@ -1,7 +1,5 @@
 import { KEYS, Url_Keys } from "../Constant";
-import { AboutUsApiResponse, BannerApiResponse, BlogApiResponse, CategoryApiResponse, CourseApiResponse, Params, PrivacyPolicyApiResponse, TermsAndConditionsApiResponse } from "../Types";
-import { FaqApiResponse } from "../Types/Faq";
-import { LatestNewsApiResponse } from "../Types/LatestNews";
+import { AboutUsApiResponse, BannerApiResponse, BlogApiResponse, CategoryApiResponse, CourseApiResponse, FaqApiResponse, LatestNewsApiResponse, Params, PrivacyPolicyApiResponse, SettingApiResponse, TermsAndConditionsApiResponse } from "../Types";
 import Get from "./Get";
 import { useApiGet } from "./hooks";
 
@@ -31,8 +29,11 @@ const Queries = {
   // ************ Latest News ***********
   useGetLatestNews: (params: Params) => useApiGet<LatestNewsApiResponse>([KEYS.LATEST_NEWS, params], () => Get(Url_Keys.LatestNews, params)),
 
-    // ************ Faq ***********
+  // ************ Faq ***********
   useGetFaq: () => useApiGet<FaqApiResponse>([KEYS.FAQ], () => Get(Url_Keys.Faq)),
+
+  // ************ Faq ***********
+  useGetSetting: (id: string) => useApiGet<SettingApiResponse>([KEYS.USER,id], () => Get(`${Url_Keys.User}/${id}`)),
 };
 
 export default Queries;

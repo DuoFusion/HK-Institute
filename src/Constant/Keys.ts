@@ -11,4 +11,9 @@ export const KEYS = {
   BLOG: "blog",
   LATEST_NEWS: "latest-news",
   FAQ: "faq",
+  USER: "user",
+  SETTING: "setting",
+  UPLOAD: {
+    ADD: "upload",
+  },
 } as const;

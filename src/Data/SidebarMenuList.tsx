@@ -19,7 +19,7 @@ export const MenuList: MenuItem[] | undefined = [
   { id: 1, icon: "home", active: false, title: "Home", type: "link", url: RouteList.Dashboard },
   { id: 4, icon: "sample-page", active: false, title: "Courses", type: "link", url: RouteList.Course },
   { id: 3, icon: "widget", active: false, title: "Category", type: "link", url: RouteList.Category },
-  { id: 2, icon: "gallery", active: false, title: "Blogs", type: "link", url: RouteList.Banner },
+  { id: 2, icon: "gallery", active: false, title: "Blogs", type: "link", url: RouteList.Blog },
   { id: 5, icon: "user", active: false, title: "Latest News", type: "link", url: RouteList.LatestNews },
   { id: 6, icon: "chat", active: false, title: "Chats", type: "link", url: RouteList.Chats },
 ];

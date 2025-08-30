@@ -9,10 +9,13 @@ import { toggleSidebar } from "../../ReduxToolkit/Slice/LayoutSlice";
 import { dynamicImage } from "../../Utils";
 // import { Maximize2 } from "iconsax-react";
 import { MenuList } from "../../Data/SidebarMenuList";
+import { Queries } from "../../Api";
 
 const Header = () => {
   const { sideBarToggle } = useAppSelector((state) => state.layout);
   const { user } = useAppSelector((state) => state.auth);
+  const { data: Setting } = Queries.useGetSetting(user?.user?._id);
+  const initialData = Setting?.data;
   // const [fullScreen, setFullScreen] = useState(false);
 
   // const fullScreenHandler = (isFullScreen: boolean) => {
@@ -41,7 +44,9 @@ const Header = () => {
               <ul className="header-left">
                 {MenuList.map((mainMenu, index) => (
                   <li className={`onhover-dropdown ${index === 4 ? " p-0" : ""}`} key={index}>
-                    <span className="f-w-700"><Link to={mainMenu.url} >{mainMenu.title}</Link></span>
+                    <span className="f-w-700">
+                      <Link to={mainMenu.url}>{mainMenu.title}</Link>
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -57,13 +62,13 @@ const Header = () => {
             </li> */}
             <li className="profile-nav onhover-dropdown p-0 m-0">
               <div className="d-flex profile-media align-items-center">
-                <Image className="b-r-6 img-40" src={user?.user?.image ?? dynamicImage(`user/user.png`)} alt="profile" />
+                <Image className="b-r-6 img-40" src={initialData?.image ?? dynamicImage(`user/user.png`)} alt="profile" />
                 <div className="flex-grow-1">
                   <span>
-                    {user?.user?.firstName} {user?.user?.lastName}
+                    {initialData?.firstName} {initialData?.lastName}
                   </span>
                   <p className="mb-0 text-capitalize">
-                    {user?.user?.email}
+                    {initialData?.email}
                     <SvgIcon iconId="header-arrow-down" />
                   </p>
                 </div>
