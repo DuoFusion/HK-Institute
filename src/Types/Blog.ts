@@ -17,3 +17,7 @@ export interface BlogDataResponse extends PageStatus {
 export interface BlogApiResponse extends MessageStatus {
   data: BlogDataResponse;
 }
+
+export interface BlogDescriptionApiResponse extends MessageStatus {
+  data: BlogType;
+}

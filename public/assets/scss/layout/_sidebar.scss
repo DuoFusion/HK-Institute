@@ -1934,8 +1934,11 @@ sidebar-wrapper/**=====================
       }
       .page-body {
         min-height: calc(100vh - 80px);
-        margin-top: 115px;
+        margin-top: 90px;
         // margin-left: $sidebar-compact-width;
+      }
+      .dashboard-body{
+        margin-top: 115px;
       }
     }
     &.dark-sidebar,

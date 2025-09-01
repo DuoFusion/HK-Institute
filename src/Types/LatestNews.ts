@@ -17,3 +17,7 @@ export interface LatestNewsResponse extends PageStatus {
 export interface LatestNewsApiResponse extends MessageStatus {
   data: LatestNewsResponse;
 }
+
+export interface LatestNewsDescriptionApiResponse extends MessageStatus {
+  data: LatestNewsType;
+}

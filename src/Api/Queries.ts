@@ -1,5 +1,6 @@
 import { KEYS, Url_Keys } from "../Constant";
-import { AboutUsApiResponse, BannerApiResponse, BlogApiResponse, CategoryApiResponse, CourseApiResponse, FaqApiResponse, LatestNewsApiResponse, Params, PrivacyPolicyApiResponse, SettingApiResponse, TermsAndConditionsApiResponse } from "../Types";
+import { AboutUsApiResponse, BannerApiResponse, BlogApiResponse, BlogDescriptionApiResponse, CategoryApiResponse, CourseApiResponse, FaqApiResponse, LatestNewsApiResponse, LatestNewsDescriptionApiResponse, Params, PrivacyPolicyApiResponse, SettingApiResponse, TermsAndConditionsApiResponse } from "../Types";
+import { LectureApiResponse } from "../Types/Lecture";
 import Get from "./Get";
 import { useApiGet } from "./hooks";
 
@@ -25,15 +26,19 @@ const Queries = {
 
   // ************ Blog ***********
   useGetBlog: (params: Params) => useApiGet<BlogApiResponse>([KEYS.BLOG, params], () => Get(Url_Keys.Blog, params)),
+  useGetBlogDescription: (id: string) => useApiGet<BlogDescriptionApiResponse>([KEYS.BLOG, id], () => Get(`${Url_Keys.Blog}/${id}`)),
 
   // ************ Latest News ***********
   useGetLatestNews: (params: Params) => useApiGet<LatestNewsApiResponse>([KEYS.LATEST_NEWS, params], () => Get(Url_Keys.LatestNews, params)),
-
+  useGetLatestNewsDescription: (id: string) => useApiGet<LatestNewsDescriptionApiResponse>([KEYS.LATEST_NEWS, id], () => Get(`${Url_Keys.LatestNews}/${id}`)),
   // ************ Faq ***********
   useGetFaq: () => useApiGet<FaqApiResponse>([KEYS.FAQ], () => Get(Url_Keys.Faq)),
 
   // ************ Faq ***********
-  useGetSetting: (id: string) => useApiGet<SettingApiResponse>([KEYS.USER,id], () => Get(`${Url_Keys.User}/${id}`)),
+  useGetSetting: (id: string) => useApiGet<SettingApiResponse>([KEYS.USER, id], () => Get(`${Url_Keys.User}/${id}`)),
+
+  // ************ Lecture ***********
+  useGetLecture: (params: Params) => useApiGet<LectureApiResponse>([KEYS.LECTURE, params], () => Get(Url_Keys.Lecture, params)),
 };
 
 export default Queries;

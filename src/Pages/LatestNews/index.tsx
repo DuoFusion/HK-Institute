@@ -6,38 +6,39 @@ import { Image, Pagination } from "antd";
 import { useBasicTableFilterHelper } from "../../Utils/hook";
 import Breadcrumbs from "../../CoreComponents/Breadcrumbs";
 
-const Blog = () => {
+const LatestNews = () => {
   const { pageNumber, pageSize, params, handlePaginationChange } = useBasicTableFilterHelper({
     initialParams: { page: 1, limit: 6 },
     debounceDelay: 500,
   });
 
-  const { data: Blog, isLoading } = Queries.useGetBlog(params);
-  const BlogData = Blog?.data;
+  const { data: LatestNews, isLoading } = Queries.useGetLatestNews(params);
+  const LatestNewsData = LatestNews?.data;
   return (
     <>
-      <Breadcrumbs mainTitle="Blog" parent="Course" />
+      <Breadcrumbs mainTitle="Latest News" parent="Pages" />
       <main className="page-content">
         {isLoading ? (
           <></>
-        ) : BlogData?.blog_data?.length > 0 ? (
+        ) : LatestNewsData?.latestNews_data?.length > 0 ? (
           <div className="">
             <Row>
-              {BlogData?.blog_data.map((item, index) => (
+              {LatestNewsData?.latestNews_data?.map((item, index) => (
                 <Col lg="6" xl="4" key={index}>
                   <Card className="shadow border-0">
                     <CardBody>
-                      <Link to={`${RouteList.BlogDescription}/${item._id}`}>
+                      <Link to={`${RouteList.LatestNewsDescription}/${item._id}`}>
                         {/* <div
-                    className="card"
-                    style={{
-                      backgroundImage: `url(${item.thumbnail})`,
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
-                    }}
-                  ></div> */}
+                        className="card"
+                        style={{
+                          backgroundImage: `url(${item.thumbnail})`,
+                          backgroundSize: "cover",
+                          backgroundPosition: "center",
+                          height: "200px",
+                        }}
+                      ></div> */}
                         <Image className="img-fluid w-100 rounded" preview={false} src={item?.thumbnail} alt="blog-main" />
-                        <div className="latest-news-text pt-3">
+                        <div className="latest-news-text mt-3">
                           <h2 className="title text-center">{item.title}</h2>
                           <p className="copy text-center">{item.subtitle}</p>
                           <div className="line-clamp" dangerouslySetInnerHTML={{ __html: item?.description || "" }} />
@@ -48,7 +49,7 @@ const Blog = () => {
                 </Col>
               ))}
             </Row>
-            <Pagination total={BlogData?.totalData} pageSize={pageSize} current={pageNumber} align="center" showSizeChanger={true} onChange={handlePaginationChange} />
+            <Pagination total={LatestNewsData?.totalData} pageSize={pageSize} current={pageNumber} align="center" showSizeChanger={true} onChange={handlePaginationChange} />
           </div>
         ) : null}
       </main>
@@ -56,4 +57,4 @@ const Blog = () => {
   );
 };
 
-export default Blog;
+export default LatestNews;

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Col, Row } from "reactstrap";
 import { RouteList } from "../../Constant/RouteList";
 import { Image } from "../../CoreComponents/Image";
@@ -12,6 +12,8 @@ import { MenuList } from "../../Data/SidebarMenuList";
 import { Queries } from "../../Api";
 
 const Header = () => {
+  const location = useLocation();
+
   const { sideBarToggle } = useAppSelector((state) => state.layout);
   const { user } = useAppSelector((state) => state.auth);
   const { data: Setting } = Queries.useGetSetting(user?.user?._id);
@@ -43,9 +45,9 @@ const Header = () => {
             <div className="left-menu-header">
               <ul className="header-left">
                 {MenuList.map((mainMenu, index) => (
-                  <li className={`onhover-dropdown ${index === 4 ? " p-0" : ""}`} key={index}>
-                    <span className="f-w-700">
-                      <Link to={mainMenu.url}>{mainMenu.title}</Link>
+                  <li className="onhover-dropdown" key={index}>
+                    <span className={`f-w-700 ${location.pathname === mainMenu.url ? "active" : ""}`}>
+                      <Link to={mainMenu.url} className="">{mainMenu.title}</Link>
                     </span>
                   </li>
                 ))}

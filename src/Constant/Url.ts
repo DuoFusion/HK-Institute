@@ -19,6 +19,7 @@ const URL = {
   Upload: {
     Add: "/upload",
   },
+  Lecture:"/lecture"
 } as const;
 
 type UrlMap = typeof URL;

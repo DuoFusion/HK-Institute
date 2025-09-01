@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Queries } from "../../Api";
 import { RouteList } from "../../Constant";
 
 const Category = () => {
+  const navigate = useNavigate()
   const { data: Category, isLoading } = Queries.useGetCategory({ featureFilter: true, actionFilter: true });
   const CategoryData = Category?.data;
 
@@ -61,7 +62,7 @@ const Category = () => {
               </Swiper>
             </div>
             <div className="text-center">
-              <button className="tf-btn btn-white">View all</button>
+              <button className="tf-btn btn-white" onClick={() => navigate(RouteList.Category)}>View all</button>
             </div>
           </section>
         )

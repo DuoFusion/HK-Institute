@@ -1,5 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Queries } from "../../Api";
+import { useNavigate } from "react-router-dom";
+import { RouteList } from "../../Constant";
 
 export const AboutCourseSliderSetting = {
   spaceBetween: 24,
@@ -12,6 +14,8 @@ export const AboutCourseSliderSetting = {
 };
 
 const Course = () => {
+  const navigate = useNavigate()
+
   const { data: Course, isLoading } = Queries.useGetCourse({ featureFilter: true, actionFilter: true, lockFilter: true });
   const CourseData = Course?.data;
 
@@ -47,7 +51,7 @@ const Course = () => {
                   </Swiper>
                 </div>
                 <div className="text-center view-all">
-                  <button className="tf-btn btn-white">View all</button>
+                  <button className="tf-btn btn-white" onClick={() => navigate(RouteList.Course)}>View all</button>
                 </div>
               </div>
             </div>

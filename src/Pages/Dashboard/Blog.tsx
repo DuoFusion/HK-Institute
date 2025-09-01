@@ -1,6 +1,8 @@
 import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Queries } from "../../Api";
+import { Link } from "react-router-dom";
+import { RouteList } from "../../Constant";
 
 const Blog = () => {
   const { data: Blog, isLoading } = Queries.useGetBlog({});
@@ -28,20 +30,22 @@ const Blog = () => {
           >
             {BlogData.map((item, index) => (
               <SwiperSlide key={index}>
-                <div
-                  className="card"
-                  style={{
-                    backgroundImage: `url(${item.thumbnail})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                  }}
-                >
-                  <div className="content">
-                    <h2 className="title">{item.title}</h2>
-                    <p className="copy">{item.subtitle}</p>
-                    <button className="btn">Read More</button>
+                <Link to={`${RouteList.BlogDescription}/${item._id}`}>
+                  <div
+                    className="cards"
+                    style={{
+                      backgroundImage: `url(${item.thumbnail})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                    }}
+                  >
+                    <div className="content">
+                      <h2 className="title">{item.title}</h2>
+                      <p className="copy">{item.subtitle}</p>
+                      <button className="btn">Read More</button>
+                    </div>
                   </div>
-                </div>
+                </Link>
               </SwiperSlide>
             ))}
           </Swiper>

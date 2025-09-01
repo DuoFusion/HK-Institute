@@ -1,6 +1,6 @@
-import { SelectOption } from "./CoreComponents";
+import { CommonDataType, MessageStatus, PageStatus } from "./CoreComponents";
 
-export interface LectureType {
+export interface LectureType extends CommonDataType{
   _id: string;
   title: string;
   youtubeLink: string;
@@ -8,35 +8,12 @@ export interface LectureType {
   thumbnail: string;
   PDF: string;
   userIds: string[];
-  isDeleted: boolean;
-  createdAt: string;
-  updatedAt: string;
 }
 
-export interface LectureState {
-  page: number;
-  limit: number;
-  page_limit: number;
-}
-
-export interface LectureApiResponse {
+export interface LectureDataResponse extends PageStatus {
   lecture_data: LectureType[];
-  totalData: number;
-  state: LectureState;
 }
 
-export interface LectureSliceType {
-  isLectureModal: boolean;
-  allLecture: LectureApiResponse;
-  isLoadingLecture: boolean;
-  singleEditingIdLecture: string;
-  singleLectureData: LectureType;
-  singleCourseId: string;
-}
-
-export interface LectureFormData {
-  title: string;
-  youtubeLink: string;
-  priority: number;
-  userIds: SelectOption[];
+export interface LectureApiResponse extends MessageStatus {
+  data: LectureDataResponse;
 }

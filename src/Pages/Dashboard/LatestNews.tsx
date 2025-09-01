@@ -1,5 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Queries } from "../../Api";
+import { Link } from "react-router-dom";
+import { RouteList } from "../../Constant";
 
 const LatestNews = () => {
   const { data: LatestNews, isLoading } = Queries.useGetLatestNews({});
@@ -25,20 +27,20 @@ const LatestNews = () => {
           >
             {LatestNewsData?.latestNews_data.map((item, index) => (
               <SwiperSlide key={index}>
-                <div >
+                <Link to={`${RouteList.LatestNewsDescription}/${item._id}`}>
                   <div
-                    className="card"
+                    className="cards"
                     style={{
                       backgroundImage: `url(${item.thumbnail})`,
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                     }}
                   ></div>
-                  <div className="latest-news-text text-center">
+                  <div className="latest-news-text text-center mt-3">
                     <h2 className="title">{item.title}</h2>
                     <p className="copy">{item.subtitle}</p>
                   </div>
-                </div>
+                </Link>
               </SwiperSlide>
             ))}
           </Swiper>

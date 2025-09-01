@@ -5,37 +5,37 @@
   background-blend-mode: overlay;
   background-color: rgba($white, 0.5);
   .left-header {
-    .left-menu-header{
-      ul{
-        &.header-left{
-          li{ 
-            &:last-child{
+    .left-menu-header {
+      ul {
+        &.header-left {
+          li {
+            &:last-child {
               display: none !important;
             }
           }
         }
-      } 
+      }
     }
-  } 
-  .sale-card{
-    .sale-date{
-      a{
-        span{
+  }
+  .sale-card {
+    .sale-date {
+      a {
+        span {
           display: none;
         }
       }
     }
   }
-  .filter-cards-view{
-    span{
+  .filter-cards-view {
+    span {
       font-size: 14px;
     }
-  } 
-  .alert-primary{
-    h4{
-      color: var(--body-font-color); 
+  }
+  .alert-primary {
+    h4 {
+      color: var(--body-font-color);
     }
-    p{
+    p {
       color: var(--body-font-color);
     }
   }
@@ -55,8 +55,8 @@
         left: unset;
         right: 0;
       }
-      &.open { 
-        opacity: 1; 
+      &.open {
+        opacity: 1;
         visibility: visible;
       }
     }
@@ -66,7 +66,7 @@
       .faq-accordion.default-according {
         margin-bottom: 0;
         .row {
-          >div {
+          > div {
             &:last-child {
               .card {
                 margin-bottom: 0;
@@ -77,20 +77,20 @@
       }
     }
   }
-  .ecommerce-dashboard{
+  .ecommerce-dashboard {
     .last-orders-table {
       tbody {
         tr {
           td {
             .user-data {
               span {
-                text-overflow:ellipsis;
-                overflow:hidden; 
+                text-overflow: ellipsis;
+                overflow: hidden;
                 display: -webkit-box !important;
                 -webkit-line-clamp: 1;
-                -webkit-box-orient: vertical; 
+                -webkit-box-orient: vertical;
                 white-space: normal;
-              } 
+              }
             }
           }
         }
@@ -98,7 +98,7 @@
     }
     .sale-card {
       .sale-date {
-        a{ 
+        a {
           display: none;
         }
       }
@@ -107,14 +107,14 @@
       ul {
         li {
           .sale-value {
-            .sales-value{
-              span{
-                &:last-child{
-                  text-overflow:ellipsis;
-                  overflow:hidden;
+            .sales-value {
+              span {
+                &:last-child {
+                  text-overflow: ellipsis;
+                  overflow: hidden;
                   display: -webkit-box !important;
                   -webkit-line-clamp: 1;
-                  -webkit-box-orient: vertical; 
+                  -webkit-box-orient: vertical;
                   white-space: normal;
                 }
               }
@@ -124,52 +124,52 @@
       }
     }
   }
-  .project-summary{
-    thead{ 
-      tr{
-        th{
-          &:nth-child(5){
+  .project-summary {
+    thead {
+      tr {
+        th {
+          &:nth-child(5) {
             display: none;
           }
-          &:nth-child(4){
-            display: none;
-          }
-        } 
-      }
-    }
-    tbody{
-      tr{
-        td{
-          &:nth-child(5){
-            display: none;
-          }
-          &:nth-child(4){
+          &:nth-child(4) {
             display: none;
           }
         }
-        &:nth-child(4){
+      }
+    }
+    tbody {
+      tr {
+        td {
+          &:nth-child(5) {
+            display: none;
+          }
+          &:nth-child(4) {
+            display: none;
+          }
+        }
+        &:nth-child(4) {
           border-bottom: none;
-          td{
+          td {
             border-bottom: none;
             padding-bottom: 0px;
           }
         }
-        &:last-child{
+        &:last-child {
           border-bottom: none;
-          td{
+          td {
             display: none;
             border-bottom: none;
           }
         }
       }
     }
-  } 
+  }
   .summary-card {
     .summary-progressbar {
       ul {
         li {
           width: 50%;
-          &:nth-child(3){ 
+          &:nth-child(3) {
             border-right: none;
           }
           &:last-child {
@@ -179,82 +179,81 @@
       }
     }
   }
-  .last-orders-table{
-    thead{
-      tr{
-        th{
-          &:nth-child(3){ 
+  .last-orders-table {
+    thead {
+      tr {
+        th {
+          &:nth-child(3) {
             display: none;
           }
-          &:nth-child(5){
+          &:nth-child(5) {
             display: none;
           }
         }
       }
     }
-    tbody{
-      tr{
-        td{
-          &:nth-child(3){ 
+    tbody {
+      tr {
+        td {
+          &:nth-child(3) {
             display: none;
           }
-          &:nth-child(5){
+          &:nth-child(5) {
             display: none;
           }
         }
       }
     }
   }
-  @media screen and (max-width: 1399px) and (min-width:1199px) {
+  @media screen and (max-width: 1399px) and (min-width: 1199px) {
     .proorders-xl-1 {
-      order: 1; 
+      order: 1;
     }
-   
+
     .proorders-xl-2 {
       order: 2;
     }
-  
+
     .proorders-xl-3 {
       order: 3;
     }
-  
-    .proorders-xl-4 { 
+
+    .proorders-xl-4 {
       order: 4;
     }
-  
+
     .proorders-xl-5 {
       order: 5;
     }
-  
+
     .proorders-xl-6 {
       order: 6;
     }
-  
+
     .proorders-xl-7 {
       order: 7;
     }
-  
+
     .proorders-xl-8 {
       order: 8;
     }
-  
+
     .proorders-xl-9 {
       order: 9;
     }
-   
+
     .proorders-xl-10 {
       order: 10;
     }
-  
-  
+
     .proorders-xl-11 {
       order: 11;
     }
-   
+
     .proorders-xl-12 {
       order: 12;
     }
-  
+
     .proorders-xl-13 {
       order: 13;
     }
@@ -277,21 +276,21 @@
         }
       }
     }
-    
-    .learning-filter { 
+
+    .learning-filter {
       order: -1;
     }
     .artist-table {
       .appointment-table.customer-table {
-          table { 
-            tr {
-                td {
-                    &:last-child {
-                      min-width: 100px;
-                    }
-                }
+        table {
+          tr {
+            td {
+              &:last-child {
+                min-width: 100px;
+              }
             }
           }
+        }
       }
     }
     &.dark-only {
@@ -339,7 +338,7 @@
       }
     }
     .currency-widget {
-      div[class*=bg-light-] {
+      div[class*="bg-light-"] {
         display: none;
       }
     }
@@ -430,7 +429,7 @@
     .apache-cotainer-large,
     #line-visual,
     #line-visulH {
-      >div,
+      > div,
       canvas {
         width: 100% !important;
       }
@@ -439,7 +438,7 @@
       .page-header {
         .header-wrapper {
           .nav-right {
-            > ul  {
+            > ul {
               > li {
                 &:first-child {
                   display: none;
@@ -465,20 +464,20 @@
         }
       }
     }
-  .page-wrapper {
-    .page-header {
-      .header-wrapper {
-        padding: 18px 30px;
-        .nav-right {
-          > ul {
-            > li {
-              padding: 6px 8px;
+    .page-wrapper {
+      .page-header {
+        .header-wrapper {
+          padding: 18px 30px;
+          .nav-right {
+            > ul {
+              > li {
+                padding: 6px 8px;
+              }
             }
           }
         }
       }
     }
-  }
     .page-wrapper,
     &.page-wrapper {
       &.box-layout {
@@ -493,13 +492,13 @@
             top: $box-layout-space;
             border-radius: 10px 0 0 10px;
             &.close_icon {
-              ~footer {
+              ~ footer {
                 width: 1214px;
                 left: 48%;
                 padding-left: 52px !important;
               }
-              ~.footer-fix {
-                padding-left: 0; 
+              ~ .footer-fix {
+                padding-left: 0;
               }
               .sidebar-main {
                 .sidebar-links {
@@ -564,8 +563,8 @@
                   }
                   a {
                     &.active {
-                      ~.sidebar-submenu,
-                      ~.mega-menu-container {
+                      ~ .sidebar-submenu,
+                      ~ .mega-menu-container {
                         animation: unset;
                       }
                     }
@@ -696,7 +695,7 @@
                   height: calc(100vh - 316px);
                 }
               }
-              ~footer {
+              ~ footer {
                 width: 1280px;
                 left: 50%;
                 margin-left: 0;
@@ -774,11 +773,11 @@
       }
       .page-body-wrapper {
         border-radius: 10px 10px 0 0;
-        width: 1280px; 
+        width: 1280px;
         box-shadow: 4px 11px 25px rgba(0, 0, 0, 0.07);
         margin: 0 auto;
         overflow: hidden;
-        
+
         .active-order-table {
           max-width: 443px;
           overflow: auto;
@@ -822,11 +821,11 @@
           width: 1280px;
           margin: 0 auto;
           padding-left: 275px !important;
-          margin-bottom: 38px !important; 
+          margin-bottom: 38px !important;
           position: fixed;
           left: 50%;
           transform: translate(-50%, 0);
-          border-radius: 0 0 10px 10px; 
+          border-radius: 0 0 10px 10px;
         }
         .blockquote-footer {
           margin-left: 0;
@@ -842,7 +841,7 @@
               align-items: center;
               justify-content: center;
               min-width: 300px;
-              >div {
+              > div {
                 z-index: 8;
                 background-color: rgba(255, 255, 255, 0.75);
                 background-blend-mode: overlay;
@@ -921,7 +920,7 @@
       }
       ul {
         &.close_icon {
-          >li {
+          > li {
             label {
               padding: 0;
               &:after {
@@ -972,7 +971,7 @@
           .bitcoin-content {
             .bitcoin-numbers {
               h6 {
-                font-size: 14PX;
+                font-size: 14px;
               }
             }
             &.text-right {
@@ -1139,7 +1138,7 @@
             padding-left: 12px;
           }
           .col-xl-3 {
-            +.col-xl-3 {
+            + .col-xl-3 {
               padding-right: 12px;
             }
           }
@@ -1182,7 +1181,7 @@
         }
       }
     }
-    // Dashboard-1 
+    // Dashboard-1
     .default-dashboard {
       .review-slider {
         .review {

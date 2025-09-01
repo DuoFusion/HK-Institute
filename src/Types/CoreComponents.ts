@@ -3,6 +3,7 @@ import type { GlobalConfigProps } from "antd/es/config-provider";
 import { InputProps } from "reactstrap";
 import { GetProp, UploadProps } from "antd";
 import { UploadListType } from "antd/es/upload/interface";
+import { Params } from "./Api";
 
 export interface ApiResponse<T> {
   status: number;
@@ -79,9 +80,10 @@ export interface CardHeaderProp {
 }
 
 export interface ModalPassPropsType {
-  getApi: () => void;
-  isEdit: boolean;
-  setEdit: (isEdit: boolean) => void;
+  isModal: boolean;
+  setModal: (isEdit: boolean) => void;
+  link?: string;
+  pdf?: string;
 }
 
 export interface CustomTypeaheadType {
@@ -176,4 +178,12 @@ export interface ImageUploadProps {
   isListType?: UploadListType;
   label?: string;
   required?: boolean;
+}
+
+// ************ Basic Table Filter Helper Options ***********
+
+export interface UseBasicTableFilterHelperOptions {
+  initialParams?: Params;
+  debounceDelay?: number;
+  sortKey?: string;
 }

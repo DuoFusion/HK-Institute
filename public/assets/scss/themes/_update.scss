@@ -3333,3 +3333,120 @@ nextjs-portal {
     }
   }
 }
+
+.lock .card-body::before {
+  content: "Lock";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  background-color: var(--theme-default);
+  color: var(--white);
+  font-family: "Poppins", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 14px;
+  opacity: 1;
+  z-index: 5;
+}
+
+.lock .card-body > * {
+  opacity: 0.6;
+}
+
+@media (max-width: 767px) {
+  .lock .card-body::before {
+    width: 60px;
+    height: 60px;
+    font-size: 10px;
+  }
+}
+
+.line-clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* 2 line જ બતાવશે */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.ant-btn-variant-outlined:not(:disabled):not(.ant-btn-disabled):hover {
+  color: #ffffff !important;
+}
+.ant-image-preview-wrap {
+  z-index: 2000 !important;
+}
+.ant-btn-variant-outlined,
+.ant-select-outlined:not(.ant-select-disabled):not(.ant-select-customize-input):not(.ant-pagination-size-changer):hover .ant-select-selector,
+.ant-pagination .ant-pagination-item-active {
+  border-color: var(--theme-default) !important;
+}
+.ant-btn-variant-solid:not(:disabled):not(.ant-btn-disabled):active {
+  background: var(--theme-default);
+  color: #fff;
+}
+.ant-btn-variant-outlined:not(:disabled):not(.ant-btn-disabled):hover {
+  color: #ffffff !important;
+  background: var(--theme-default) !important;
+}
+.ant-btn-variant-solid:not(:disabled):not(.ant-btn-disabled):hover {
+  color: #000000 !important;
+  background: var(--white) !important;
+  border-color: var(--theme-default) !important;
+}
+.ant-select-focused.ant-select-outlined:not(.ant-select-disabled):not(.ant-select-customize-input):not(.ant-pagination-size-changer) .ant-select-selector {
+  border-color: var(--theme-default) !important;
+}
+.ant-select-dropdown .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+  background: var(--theme-default);
+  color: #ffffff;
+}
+.ant-btn-variant-solid {
+  background: var(--theme-default);
+}
+.ant-table-expanded-row-fixed {
+  width: 100% !important;
+}
+.ant-spin .ant-spin-dot-item {
+  background: var(--theme-default) !important;
+}
+
+.comment-box {
+  li {
+    margin-bottom: 30px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  .d-flex {
+    img {
+      border: 1px solid #eaeaea;
+      border-radius: 10px;
+      height: 90px;
+      margin-right: 30px;
+      padding: 7px;
+      width: 90px;
+    }
+  }
+  .comment-social {
+    li {
+      display: inline-block;
+      color: $dark-color;
+      padding-left: 20px;
+      margin-bottom: 0;
+      text-transform: uppercase;
+      &:first-child {
+        border-right: 1px solid $dark-color;
+        padding-right: 20px;
+      }
+      i {
+        padding-right: 10px;
+      }
+    }
+  }
+}

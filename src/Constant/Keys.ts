@@ -16,4 +16,5 @@ export const KEYS = {
   UPLOAD: {
     ADD: "upload",
   },
+  LECTURE:"lecture"
 } as const;

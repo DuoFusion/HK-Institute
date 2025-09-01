@@ -165,6 +165,10 @@
             color: $primary-color;
             background-color: rgba($primary-color , 0.1);
           }
+          &.active{
+            color: $primary-color;
+            background-color: rgba($primary-color , 0.1);
+          }
           @media (max-width: 1550px) and (min-width: 1200px){
             padding: 6px 10px;
           }

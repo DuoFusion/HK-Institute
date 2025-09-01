@@ -8,7 +8,7 @@ import { BreadcrumbsProps } from "../Types/CoreComponents";
 const Breadcrumbs: FC<BreadcrumbsProps> = ({ mainTitle, parent }) => {
   return (
     <Container fluid>
-      <div className="page-title">
+      <div className="page-title shadow">
         <Row>
           <Col xl="7" sm="7" className="box-col-3">
             <h3>{mainTitle}</h3>

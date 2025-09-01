@@ -8,10 +8,13 @@ export const RouteList = {
   Category: "/category",
   Course: "/course",
   Blog: "/blog",
+  BlogDescription: "/blog-description",
   LatestNews: "/latest-news",
+  LatestNewsDescription: "/latest-news-description",
   Chats: "/chats",
   AboutUs: `/about-us`,
   PrivacyPolicy: `/privacy-policy`,
   TermsAndConditions: `/terms-and-conditions`,
   ErrorPages: `/error-pages`,
+  Lecture: "/lecture",
 };

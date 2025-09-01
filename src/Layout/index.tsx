@@ -4,9 +4,12 @@ import { setSideBarToggle } from "../ReduxToolkit/Slice/LayoutSlice";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import Footer from "./Footer";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
+import Loader from "./Loader";
+import ScrollToTop from "../Utils/ScrollToTop";
 
 const Layout = () => {
+  const location = useLocation();
   // const dispatch = useAppDispatch();
   // const updateSidebarBasedOnWidth = () => {
   //   const windowWidth = window.innerWidth;
@@ -19,16 +22,20 @@ const Layout = () => {
   // }, []);
 
   return (
-    <div className="page-wrapper compact-wrapper">
-      <Header />
-      <div className="page-body-wrapper">
-        <Sidebar />
-        <div className="page-body">
-          <Outlet />
+    <>
+     <ScrollToTop />
+      <div className="page-wrapper compact-wrapper">
+        <Header />
+        <div className="page-body-wrapper">
+          <Sidebar />
+          <div className={`page-body ${location.pathname === "/dashboard" ? "dashboard-body" : ""}`}>
+            <Outlet />
+          </div>
+          <Footer />
         </div>
-        <Footer />
       </div>
-    </div>
+      <Loader />
+    </>
   );
 };
 
