@@ -46,9 +46,9 @@ const Header = () => {
               <ul className="header-left">
                 {MenuList.map((mainMenu, index) => (
                   <li className="onhover-dropdown" key={index}>
-                    <span className={`f-w-700 ${location.pathname === mainMenu.url ? "active" : ""}`}>
-                      <Link to={mainMenu.url} className="">{mainMenu.title}</Link>
-                    </span>
+                    <Link to={mainMenu.url} className="">
+                      <span className={`f-w-700 ${location.pathname === mainMenu.url ? "active" : ""}`}>{mainMenu.title}</span>
+                    </Link>
                   </li>
                 ))}
               </ul>

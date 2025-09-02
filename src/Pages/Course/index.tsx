@@ -27,9 +27,9 @@ const Course = () => {
                 <Row>
                   {UnLockCourses.map((item, index) => (
                     <Col md="6" lg="4" xl="3" key={index}>
-                      <Card className="shadow border-0">
+                      <Card className="shadow border-0 pointer">
                         <CardBody>
-                          <div onClick={() => navigate(`${RouteList.Lecture}/${item._id}`, { state: item })}>
+                          <div onClick={() => navigate(`${RouteList.Lecture}/${item._id}`)}>
                             <Image className="img-fluid w-100 rounded" preview={false} src={item?.image} alt="Course-main" />
                             <div className="latest-news-text mt-3 p-0">
                               <p className="copy text-center">{item.name}</p>

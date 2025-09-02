@@ -4,11 +4,11 @@ import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
 import { IoCheckmarkDone } from "react-icons/io5";
 import { Button, Card, Col, Form } from "reactstrap";
 // import { Post } from "../../Api";
-import { Url_Keys } from "../../Constant";
+// import { Url_Keys } from "../../Constant";
 import { Image } from "../../CoreComponents/Image";
-import SvgIcon from "../../CoreComponents/SvgIcon";
+// import SvgIcon from "../../CoreComponents/SvgIcon";
 import { useAppDispatch, useAppSelector } from "../../ReduxToolkit/Hooks";
-import { addUserUnreadMessage, setSelectUser, setUserUnreadCount } from "../../ReduxToolkit/Slice/ChatSlice";
+import { addUserUnreadMessage, setUserUnreadCount } from "../../ReduxToolkit/Slice/ChatSlice";
 // import { fetchStudentsApiData } from "../../ReduxToolkit/Slice/StudentsSlice";
 import socket from "../../socket";
 import { Chat } from "../../Types/Chat";
@@ -220,21 +220,21 @@ const ChatWindow = () => {
     setEditChatId(msg._id);
   };
 
-  const handleChatDelete = (id: string) => {
-    socket.emit("delete_message", { messageId: id });
-  };
+  // const handleChatDelete = (id: string) => {
+  //   socket.emit("delete_message", { messageId: id });
+  // };
 
-  const handleAllChatDelete = () => {
-    socket.emit("delete_conversation", { senderId: userId, receiverId: selectedUser?._id });
-  };
+  // const handleAllChatDelete = () => {
+  //   socket.emit("delete_conversation", { senderId: userId, receiverId: selectedUser?._id });
+  // };
 
-  const handleBlockStudent = async () => {
-    // const res = await Post(Url_Keys.Students.Edit, { id: selectedUser?._id, isBlocked: true });
-    // if (res?.status === 200) {
-    //   getAllStudents();
-    //   dispatch(setSelectUser(null));
-    // }
-  };
+  // const handleBlockStudent = async () => {
+  //   const res = await Post(Url_Keys.Students.Edit, { id: selectedUser?._id, isBlocked: true });
+  //   if (res?.status === 200) {
+  //     getAllStudents();
+  //     dispatch(setSelectUser(null));
+  //   }
+  // };
 
   return (
     <Col xxl="9" xl="8" md="7" className="box-col-7">
@@ -258,7 +258,7 @@ const ChatWindow = () => {
                             : "Click to start chatting..."}</p>
                   </div>
                 </div>
-                <Dropdown
+                {/* <Dropdown
                   menu={{
                     items: [
                       {
@@ -294,7 +294,7 @@ const ChatWindow = () => {
                   <div className="contact-edit chat-alert bg-light-primary">
                     <SvgIcon iconId="menubar" />
                   </div>
-                </Dropdown>
+                </Dropdown> */}
               </div>
             </div>
 
@@ -327,19 +327,19 @@ const ChatWindow = () => {
                                           </a>
                                         ),
                                       },
-                                      {
-                                        key: "2",
-                                        label: (
-                                          <a
-                                            onClick={(e) => {
-                                              e.preventDefault();
-                                              handleChatDelete(item._id);
-                                            }}
-                                          >
-                                            Delete
-                                          </a>
-                                        ),
-                                      },
+                                      // {
+                                      //   key: "2",
+                                      //   label: (
+                                      //     <a
+                                      //       onClick={(e) => {
+                                      //         e.preventDefault();
+                                      //         handleChatDelete(item._id);
+                                      //       }}
+                                      //     >
+                                      //       Delete
+                                      //     </a>
+                                      //   ),
+                                      // },
                                     ],
                                   }}
                                   trigger={["click"]}

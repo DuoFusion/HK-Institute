@@ -8,11 +8,11 @@ const LatestNews = () => {
   const LatestNewsData = LatestNews?.data;
 
   return (
-    <main className="page-content">
+    <>
       {isLoading ? (
         <></>
       ) : LatestNewsData?.latestNews_data.length > 0 ? (
-        <div className="">
+        <main className="page-content">
           <div className="flat-title wow fadeInUp">
             <div className="title display-lg-3 fw-normal">Latest News</div>
             <p className="desc text-main text-md">Our latest Latest News post</p>
@@ -44,9 +44,9 @@ const LatestNews = () => {
               </SwiperSlide>
             ))}
           </Swiper>
-        </div>
+        </main>
       ) : null}
-    </main>
+    </>
   );
 };
 

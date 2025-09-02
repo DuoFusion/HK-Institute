@@ -21,3 +21,6 @@ export interface CourseApiResponse extends MessageStatus {
   data: CourseDataResponse;
 }
 
+export interface CourseDescriptionApiResponse extends MessageStatus {
+  data: CourseType;
+}

@@ -10,11 +10,13 @@ const Category = () => {
   const CategoryData = Category?.data;
 
   return (
-    <div className="flat-spacing">
+    <>
       {isLoading ? (
         <></>
       ) : (
         CategoryData?.category_data?.length > 0 && (
+          <div className="flat-spacing">
+
           <section className="pt-0">
             {/* Section Title */}
             <div className="flat-title wow fadeInUp">
@@ -65,9 +67,10 @@ const Category = () => {
               <button className="tf-btn btn-white" onClick={() => navigate(RouteList.Category)}>View all</button>
             </div>
           </section>
+          </div>
         )
       )}
-    </div>
+    </>
   );
 };
 

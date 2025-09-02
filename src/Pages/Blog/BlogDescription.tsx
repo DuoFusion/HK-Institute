@@ -20,7 +20,7 @@ const BlogDescription = () => {
               <CardBody>
                 <div className="blog-single">
                   <div className="blog-box blog-details">
-                    <Image className="img-fluid w-100 rounded-5" preview={false} src={BlogData?.image} alt="blog-main" />
+                    <Image className="img-fluid w-100 rounded-3" preview={false} src={BlogData?.image} alt="blog-main" />
                     <div className="blog-details mt-3">
                       <h1 className="title">{BlogData?.title}</h1>
                       <p className="copy">{BlogData?.subtitle}</p>

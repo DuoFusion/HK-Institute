@@ -1,5 +1,5 @@
 import { KEYS, Url_Keys } from "../Constant";
-import { AboutUsApiResponse, BannerApiResponse, BlogApiResponse, BlogDescriptionApiResponse, CategoryApiResponse, CourseApiResponse, FaqApiResponse, LatestNewsApiResponse, LatestNewsDescriptionApiResponse, Params, PrivacyPolicyApiResponse, SettingApiResponse, TermsAndConditionsApiResponse } from "../Types";
+import { AboutUsApiResponse, BannerApiResponse, BlogApiResponse, BlogDescriptionApiResponse, CategoryApiResponse, CourseApiResponse, CourseDescriptionApiResponse, FaqApiResponse, LatestNewsApiResponse, LatestNewsDescriptionApiResponse, Params, PrivacyPolicyApiResponse, SettingApiResponse, TermsAndConditionsApiResponse } from "../Types";
 import { LectureApiResponse } from "../Types/Lecture";
 import Get from "./Get";
 import { useApiGet } from "./hooks";
@@ -23,6 +23,7 @@ const Queries = {
 
   // ************ Course ***********
   useGetCourse: (params: Params) => useApiGet<CourseApiResponse>([KEYS.COURSE, params], () => Get(Url_Keys.Course, params)),
+  useGetCourseDescription: (id: string) => useApiGet<CourseDescriptionApiResponse>([KEYS.COURSE, id], () => Get(`${Url_Keys.Course}/${id}`)),
 
   // ************ Blog ***********
   useGetBlog: (params: Params) => useApiGet<BlogApiResponse>([KEYS.BLOG, params], () => Get(Url_Keys.Blog, params)),

@@ -9,11 +9,11 @@ const Blog = () => {
   const BlogData = Blog?.data?.blog_data || [];
 
   return (
-    <main className="page-content">
+    <>
       {isLoading ? (
         <></>
       ) : BlogData.length > 0 ? (
-        <div className="">
+        <main className="page-content">
           <div className="flat-title wow fadeInUp">
             <div className="title display-lg-3 fw-normal">Blog</div>
             <p className="desc text-main text-md">Our latest blog post</p>
@@ -49,9 +49,9 @@ const Blog = () => {
               </SwiperSlide>
             ))}
           </Swiper>
-        </div>
+        </main>
       ) : null}
-    </main>
+    </>
   );
 };
 

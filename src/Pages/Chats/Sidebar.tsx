@@ -1,10 +1,9 @@
 import { Empty, Typography } from "antd";
 import { useCallback, useEffect, useState } from "react";
-import { Search } from "react-feather";
-import { Badge, Card, Col, Input, InputGroup, InputGroupText } from "reactstrap";
+import { Badge, Card, Col } from "reactstrap";
 import { Image } from "../../CoreComponents/Image";
 import { useAppDispatch, useAppSelector } from "../../ReduxToolkit/Hooks";
-import { setChatSearchData, setSelectUser, setUserLatestMessage, setUserUnreadCount } from "../../ReduxToolkit/Slice/ChatSlice";
+import { setSelectUser, setUserLatestMessage, setUserUnreadCount } from "../../ReduxToolkit/Slice/ChatSlice";
 import { dynamicImage } from "../../Utils";
 import { FormatTime } from "../../Utils/DateFormatted";
 import socket from "../../socket";
@@ -13,7 +12,7 @@ const Sidebar = () => {
   const [isAllStudents, setAllStudents] = useState([]);
 
   const dispatch = useAppDispatch();
-
+  
   // const { allStudents } = useAppSelector((state) => state.students);
   const { user } = useAppSelector((state) => state.auth);
   const { selectedUser, userUnreadCounts, userLatestMessages, isChatSearchData } = useAppSelector((state) => state.chat);
@@ -39,8 +38,15 @@ const Sidebar = () => {
         dispatch(setUserUnreadCount({ userId: senderId, count: 0 }));
       };
 
-      socket.emit("get_unread_users", { userId: currentUserId });
-      socket.on("unread_users_list", (userList) => {
+      // socket.emit("get_unread_users", { userId: currentUserId });
+      // socket.on("unread_users_list", (userList) => {
+      //   setAllStudents(userList);
+      // });
+
+      socket.emit("all_admin_show");
+      socket.on("all_admin_list", (userList) => {
+        console.log("userList", userList);
+        
         setAllStudents(userList);
       });
 
@@ -60,16 +66,16 @@ const Sidebar = () => {
   }, [currentUserId]);
 
   useEffect(() => {
-    socket.emit("get_unread_users", { userId: currentUserId });
-    socket.on("unread_users_list", (userList) => {
-      setAllStudents(userList);
-    });
-    if (isChatSearchData !== null) {
-      socket.emit("search_users", { senderId: currentUserId, search: isChatSearchData !== "" && isChatSearchData });
-      socket.on("search_users_result", (userList) => {
-        setAllStudents(userList);
-      });
-    }
+    // socket.emit("get_unread_users", { userId: currentUserId });
+    // socket.on("unread_users_list", (userList) => {
+    //   setAllStudents(userList);
+    // });
+    // if (isChatSearchData !== null) {
+    //   socket.emit("search_users", { senderId: currentUserId, search: isChatSearchData !== "" && isChatSearchData });
+    //   socket.on("search_users_result", (userList) => {
+    //     setAllStudents(userList);
+    //   });
+    // }
 
     socket.emit("get_unread_count", { receiverId: currentUserId });
     const handleUnread = ({ senderId, count }: { senderId: string; count: number }) => {
@@ -117,19 +123,19 @@ const Sidebar = () => {
     if (currentUserId) {
       socket.emit("get_unread_users", { userId: currentUserId });
 
-      const handleUnreadUsers = (userList) => {
-        setAllStudents(userList);
+      // const handleUnreadUsers = (userList) => {
+      //   setAllStudents(userList);
 
-        // Update unread counts in Redux
-        userList.forEach((user) => {
-          dispatch(setUserUnreadCount({ userId: user.userId || user._id, count: user.unreadCount || 0 }));
-        });
-      };
+      //   // Update unread counts in Redux
+      //   userList.forEach((user) => {
+      //     dispatch(setUserUnreadCount({ userId: user.userId || user._id, count: user.unreadCount || 0 }));
+      //   });
+      // };
 
-      socket.on("unread_users_list", handleUnreadUsers);
+      // socket.on("unread_users_list", handleUnreadUsers);
 
       return () => {
-        socket.off("unread_users_list", handleUnreadUsers);
+        // socket.off("unread_users_list", handleUnreadUsers);
       };
     }
   }, [currentUserId, dispatch]);
@@ -137,18 +143,18 @@ const Sidebar = () => {
   return (
     <Col xxl="3" xl="4" md="5" className="box-col-5">
       <Card className="left-sidebar-wrapper">
-        <div className="left-sidebar-chat">
+        {/* <div className="left-sidebar-chat">
           <InputGroup>
             <InputGroupText>
               <Search className="search-icon text-gray" />
             </InputGroupText>
             <Input type="text" placeholder="Search here..." onChange={(e) => dispatch(setChatSearchData(e.target.value))} />
           </InputGroup>
-        </div>
+        </div> */}
 
         <div className="advance-options">
           <div className="common-space">
-            <p>Students Chats</p>
+            <p>User Chats</p>
           </div>
 
           {isAllStudents?.length > 0 ? (

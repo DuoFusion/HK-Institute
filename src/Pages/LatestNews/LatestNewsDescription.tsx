@@ -20,7 +20,7 @@ const LatestNewsDescription = () => {
               <CardBody>
                 <div className="blog-single">
                   <div className="blog-box blog-details">
-                    <Image className="img-fluid w-100 rounded-5" preview={false} src={LatestNewsData?.image} alt="blog-main" />
+                    <Image className="img-fluid w-100 rounded-3" preview={false} src={LatestNewsData?.image} alt="blog-main" />
                     <div className="blog-details mt-3">
                       <h1 className="title">{LatestNewsData?.title}</h1>
                       <p className="copy">{LatestNewsData?.subtitle}</p>
