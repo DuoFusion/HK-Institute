@@ -31,7 +31,7 @@ const Login = () => {
           <div className="login-card">
             <div>
               <div className="login-main">
-                <Formik initialValues={{ email: "krish@123gmail.com", password: "krish@12" }} validationSchema={LoginSchema} onSubmit={handleSubmit}>
+                <Formik initialValues={{ email: "", password: "" }} validationSchema={LoginSchema} onSubmit={handleSubmit}>
                   {() => (
                     <Form>
                       <h3>Login</h3>
