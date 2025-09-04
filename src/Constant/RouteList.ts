@@ -1,8 +1,8 @@
+
 export const RouteList = {
   Home: `/`,
   Login: `/login`,
   ChangePassword: `/change-password`,
-
   Dashboard: `/dashboard`,
   Setting: `/Setting`,
   Category: "/category",
@@ -17,4 +17,6 @@ export const RouteList = {
   TermsAndConditions: `/terms-and-conditions`,
   ErrorPages: `/error-pages`,
   Lecture: "/lecture",
+  Video: "/video",
+  Pdf: "/pdf",
 };

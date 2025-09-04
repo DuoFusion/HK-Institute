@@ -1,5 +1,5 @@
 import { KEYS, Url_Keys } from "../Constant";
-import { AboutUsApiResponse, BannerApiResponse, BlogApiResponse, BlogDescriptionApiResponse, CategoryApiResponse, CourseApiResponse, CourseDescriptionApiResponse, FaqApiResponse, LatestNewsApiResponse, LatestNewsDescriptionApiResponse, Params, PrivacyPolicyApiResponse, SettingApiResponse, TermsAndConditionsApiResponse } from "../Types";
+import { AboutUsApiResponse, BannerApiResponse, BlogApiResponse, BlogDescriptionApiResponse, CategoryApiResponse, CourseApiResponse, CourseDescriptionApiResponse, CoursePurchasedApiResponse, FaqApiResponse, LatestNewsApiResponse, LatestNewsDescriptionApiResponse, Params, PrivacyPolicyApiResponse, SettingApiResponse, TermsAndConditionsApiResponse } from "../Types";
 import { LectureApiResponse } from "../Types/Lecture";
 import Get from "./Get";
 import { useApiGet } from "./hooks";
@@ -22,8 +22,10 @@ const Queries = {
   useGetCategory: (params: Params) => useApiGet<CategoryApiResponse>([KEYS.CATEGORY, params], () => Get(Url_Keys.Category, params)),
 
   // ************ Course ***********
-  useGetCourse: (params: Params) => useApiGet<CourseApiResponse>([KEYS.COURSE, params], () => Get(Url_Keys.Course, params)),
-  useGetCourseDescription: (id: string) => useApiGet<CourseDescriptionApiResponse>([KEYS.COURSE, id], () => Get(`${Url_Keys.Course}/${id}`)),
+  useGetCourse: (params: Params) => useApiGet<CourseApiResponse>([KEYS.COURSE, params], () => Get(Url_Keys.Course.Course, params)),
+  useGetCourseDescription: (id: string) => useApiGet<CourseDescriptionApiResponse>([KEYS.COURSE, id], () => Get(`${Url_Keys.Course.Course}/${id}`)),
+  useGetCoursePurchased: () => useApiGet<CoursePurchasedApiResponse>([KEYS.COURSE_PURCHASED], () => Get(Url_Keys.Course.CoursePurchased)),
+  useGetCourseUnPurchased: () => useApiGet<CoursePurchasedApiResponse>([KEYS.COURSE_UNPURCHASED], () => Get(Url_Keys.Course.CourseUnPurchased)),
 
   // ************ Blog ***********
   useGetBlog: (params: Params) => useApiGet<BlogApiResponse>([KEYS.BLOG, params], () => Get(Url_Keys.Blog, params)),

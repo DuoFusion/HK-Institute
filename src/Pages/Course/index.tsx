@@ -7,25 +7,22 @@ import Breadcrumbs from "../../CoreComponents/Breadcrumbs";
 
 const Course = () => {
   const navigate = useNavigate();
-  const { data: Course, isLoading } = Queries.useGetCourse({ featureFilter: true, actionFilter: true });
-  const CourseData = Course?.data;
-
-  const UnLockCourses = CourseData?.course_data?.filter((item) => item.locked === true);
-  const LockCourses = CourseData?.course_data?.filter((item) => item.locked !== true);
+  const { data: CoursePurchased, isLoading: CoursePurchasedLoading } = Queries.useGetCoursePurchased();
+  const { data: CourseUnPurchased, isLoading: CourseUnPurchasedLoading } = Queries.useGetCourseUnPurchased();
 
   return (
     <>
       <Breadcrumbs mainTitle="Course" parent="Pages" />
       <main className="page-content">
-        {isLoading ? (
+        {CoursePurchasedLoading && CourseUnPurchasedLoading ? (
           <></>
-        ) : CourseData?.course_data?.length > 0 ? (
+        ) : (
           <>
-            {UnLockCourses?.length > 0 && (
+            {CoursePurchased?.data?.length > 0 && (
               <div>
                 <h2 className="text-center pb-4">Un Lock Courses</h2>
                 <Row>
-                  {UnLockCourses.map((item, index) => (
+                  {CoursePurchased?.data?.map((item, index) => (
                     <Col md="6" lg="4" xl="3" key={index}>
                       <Card className="shadow border-0 pointer">
                         <CardBody>
@@ -42,11 +39,11 @@ const Course = () => {
                 </Row>
               </div>
             )}
-            {LockCourses?.length > 0 && (
+            {CourseUnPurchased?.data?.length > 0 && (
               <div>
                 <h2 className="text-center pb-4">Lock Courses</h2>
                 <Row>
-                  {LockCourses.map((item, index) => (
+                  {CourseUnPurchased?.data?.map((item, index) => (
                     <Col md="6" lg="4" xl="3" key={index}>
                       <Card className="shadow border-0 lock">
                         <CardBody>
@@ -64,7 +61,7 @@ const Course = () => {
               </div>
             )}
           </>
-        ) : null}
+        )}
       </main>
     </>
   );

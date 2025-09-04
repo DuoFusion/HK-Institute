@@ -2,7 +2,7 @@ import { notification } from "antd";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import { Params } from "../Types";
 import { getToken } from "../Utils";
-import { AntdNotification, ErrorMessage } from "../Utils/toast";
+// import { AntdNotification, ErrorMessage } from "../Utils/toast";
 import { HTTP_STATUS, RouteList } from "../Constant";
 
 let isRedirecting = false;
@@ -37,7 +37,7 @@ async function Get<T>(url: string, params?: Params, headers?: Record<string, str
       window.location.href = RouteList.Home;
       setTimeout(() => (isRedirecting = false), 1000);
     } else {
-      AntdNotification(notification, "error", ErrorMessage(errorMessage));
+      // AntdNotification(notification, "error", ErrorMessage(errorMessage));
     }
     throw null;
   }

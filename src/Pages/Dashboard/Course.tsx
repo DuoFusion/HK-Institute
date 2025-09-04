@@ -16,15 +16,14 @@ export const AboutCourseSliderSetting = {
 const Course = () => {
   const navigate = useNavigate();
 
-  const { data: Course, isLoading } = Queries.useGetCourse({ featureFilter: true, actionFilter: true, lockFilter: true });
-  const CourseData = Course?.data;
+  const { data: Course, isLoading } = Queries.useGetCoursePurchased();
 
   return (
     <>
       {isLoading ? (
         <></>
       ) : (
-        CourseData?.course_data?.length > 0 && (
+        (Course?.data?.length ?? 0) > 0 && (
           <section className="row_am pricing_section white_text">
             <div className="pricing_inner">
               {/* container start */}
@@ -36,7 +35,7 @@ const Course = () => {
                 {/* Pricing Plans */}
                 <div className="pricing_pannel">
                   <Swiper {...AboutCourseSliderSetting} className="courses-swiper">
-                    {CourseData?.course_data?.map((item, index) => (
+                    {Course?.data?.map((item, index) => (
                       <SwiperSlide key={index}>
                         <div className={`pointer pannel_block ${index % 2 ? "highlited_block" : ""}`} onClick={() => navigate(`${RouteList.Lecture}/${item._id}`)}>
                           <div className="image d-block img-style">

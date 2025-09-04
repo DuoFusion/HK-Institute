@@ -10,7 +10,11 @@ const URL = {
   TermsAndConditions: "/terms-condition",
   Banner: "/banner",
   Category: "/category",
-  Course: "/course",
+  Course:{
+    Course:"/course",
+    CoursePurchased:"/course/purchased",
+    CourseUnPurchased:"/course/unpurchased"
+  },
   Blog: "/blog",
   LatestNews: "/latest-news",
   Faq: "/faq",

@@ -12,8 +12,7 @@ const Sidebar = () => {
   const [isAllStudents, setAllStudents] = useState([]);
 
   const dispatch = useAppDispatch();
-  
-  // const { allStudents } = useAppSelector((state) => state.students);
+
   const { user } = useAppSelector((state) => state.auth);
   const { selectedUser, userUnreadCounts, userLatestMessages, isChatSearchData } = useAppSelector((state) => state.chat);
 
@@ -25,35 +24,10 @@ const Sidebar = () => {
       dispatch(setUserUnreadCount({ userId: selectUser._id, count: 0 }));
       dispatch(setSelectUser(selectUser));
 
-      // Optionally, notify the server that messages are seen
+      // Notify the server that messages are seen
       if (currentUserId && selectUser._id) {
         socket.emit("mark_seen", { senderId: selectUser._id, receiverId: currentUserId });
       }
-
-      // chatContainerRef.current?.scrollTo({
-      //   top: chatContainerRef.current.scrollHeight,
-      //   behavior: "smooth",
-      // });
-      const handleUnread = ({ senderId, count }: { senderId: string; count: number }) => {
-        dispatch(setUserUnreadCount({ userId: senderId, count: 0 }));
-      };
-
-      // socket.emit("get_unread_users", { userId: currentUserId });
-      // socket.on("unread_users_list", (userList) => {
-      //   setAllStudents(userList);
-      // });
-
-      socket.emit("all_admin_show");
-      socket.on("all_admin_list", (userList) => {
-        console.log("userList", userList);
-        
-        setAllStudents(userList);
-      });
-
-      // dispatch(setUserUnreadCount({ userId: selectUser._id, count: 0 })); // This line is removed as per the new_code
-      return () => {
-        socket.off("unread_count", handleUnread);
-      };
     },
     [dispatch, currentUserId]
   );
@@ -61,100 +35,128 @@ const Sidebar = () => {
   useEffect(() => {
     if (currentUserId) {
       socket.emit("join", currentUserId);
-      socket.emit("get_unread_users", { userId: currentUserId });
+      socket.emit("get_admin", { senderId: currentUserId });
     }
   }, [currentUserId]);
 
   useEffect(() => {
-    // socket.emit("get_unread_users", { userId: currentUserId });
-    // socket.on("unread_users_list", (userList) => {
-    //   setAllStudents(userList);
-    // });
-    // if (isChatSearchData !== null) {
-    //   socket.emit("search_users", { senderId: currentUserId, search: isChatSearchData !== "" && isChatSearchData });
-    //   socket.on("search_users_result", (userList) => {
-    //     setAllStudents(userList);
-    //   });
-    // }
+    if (!currentUserId) return;
 
-    socket.emit("get_unread_count", { receiverId: currentUserId });
-    const handleUnread = ({ senderId, count }: { senderId: string; count: number }) => {
-      dispatch(setUserUnreadCount({ userId: senderId, count: count + 1 }));
+    // Handle admin users list
+    const handleAdminUsers = (data: any) => {
+      console.log("Admin users list:", data);
+      if (data?.users && Array.isArray(data.users)) {
+        setAllStudents(data.users);
+        
+        // Initialize unread counts for all users
+        data.users.forEach((user: any) => {
+          if (user._id && user._id !== currentUserId) {
+            // Get unread count for each user
+            socket.emit("get_unread_count", { 
+              senderId: user._id, 
+              receiverId: currentUserId 
+            });
+            
+            // Get latest message for each user
+            socket.emit("get_latest_message", {
+              senderId: user._id,
+              receiverId: currentUserId,
+            });
+          }
+        });
+      }
     };
 
-    // Get latest messages for all users
-    // if (currentUserId && allStudents?.user_data) {
-    //   allStudents?.user_data
-    //     .filter((x: any) => x._id !== currentUserId)
-    //     .forEach((user: any) => {
-    //       socket.emit("get_latest_message", {
-    //         senderId: user._id,
-    //         receiverId: currentUserId,
-    //       });
-    //     });
-    // }
-
-    socket.on("latest_message_response", ({ senderId, message }) => {
-      if (message) {
+    // Handle latest message responses
+    const handleLatestMessage = ({ senderId, message }: { senderId: string; message: any }) => {
+      if (message && senderId) {
         dispatch(setUserLatestMessage({ userId: senderId, message }));
       }
-    });
+    };
 
-    socket.on("receive_message", (message: any) => {
-      // Update unread count when new message arrives
+    // Handle new messages - this is the key for live updates
+    const handleReceiveMessage = (message: any) => {
+      console.log("Received new message:", message);
       if (message.senderId && message.senderId !== currentUserId) {
         const senderId = typeof message.senderId === "string" ? message.senderId : message.senderId._id;
-        const currentCount = userUnreadCounts[senderId] || 0;
-        dispatch(setUserUnreadCount({ userId: senderId, count: currentCount + 1 }));
+        
+        if (senderId) {
+          // Update unread count for this sender
+          const currentCount = userUnreadCounts[senderId] || 0;
+          dispatch(setUserUnreadCount({ userId: senderId, count: currentCount + 1 }));
 
-        // Update latest message
-        dispatch(setUserLatestMessage({ userId: senderId, message }));
+          // Update latest message
+          dispatch(setUserLatestMessage({ userId: senderId, message }));
+        }
       }
-    });
-
-    return () => {
-      socket.off("unread_count", handleUnread);
-      socket.off("latest_message_response");
-      socket.off("receive_message");
     };
-  }, [dispatch, currentUserId, userUnreadCounts, isChatSearchData]);
 
+    // Handle messages seen confirmation
+    const handleMessagesSeen = ({ senderId }: { senderId: string }) => {
+      console.log("Messages marked as seen for:", senderId);
+      // Update unread count to 0 for the user whose messages were seen
+      dispatch(setUserUnreadCount({ userId: senderId, count: 0 }));
+    };
+
+    // Handle individual unread count updates
+    const handleUnreadCount = ({ senderId, count }: { senderId: string; count: number }) => {
+      console.log("Unread count update:", { senderId, count });
+      if (senderId) {
+        dispatch(setUserUnreadCount({ userId: senderId, count }));
+      }
+    };
+
+    // Set up event listeners
+    socket.on("get_admin_all", handleAdminUsers);
+    socket.on("latest_message_response", handleLatestMessage);
+    socket.on("receive_message", handleReceiveMessage);
+    socket.on("messages_seen", handleMessagesSeen);
+    socket.on("unread_count", handleUnreadCount);
+
+    // Cleanup event listeners
+    return () => {
+      socket.off("get_admin_all", handleAdminUsers);
+      socket.off("latest_message_response", handleLatestMessage);
+      socket.off("receive_message", handleReceiveMessage);
+      socket.off("messages_seen", handleMessagesSeen);
+      socket.off("unread_count", handleUnreadCount);
+    };
+  }, [dispatch, currentUserId, userUnreadCounts]);
+
+  // Refresh unread counts and latest messages periodically
   useEffect(() => {
-    if (currentUserId) {
-      socket.emit("get_unread_users", { userId: currentUserId });
-
-      // const handleUnreadUsers = (userList) => {
-      //   setAllStudents(userList);
-
-      //   // Update unread counts in Redux
-      //   userList.forEach((user) => {
-      //     dispatch(setUserUnreadCount({ userId: user.userId || user._id, count: user.unreadCount || 0 }));
-      //   });
-      // };
-
-      // socket.on("unread_users_list", handleUnreadUsers);
-
-      return () => {
-        // socket.off("unread_users_list", handleUnreadUsers);
+    if (currentUserId && isAllStudents.length > 0) {
+      const refreshData = () => {
+        isAllStudents.forEach((user: any) => {
+          if (user._id && user._id !== currentUserId) {
+            // Refresh unread count
+            socket.emit("get_unread_count", { 
+              senderId: user._id, 
+              receiverId: currentUserId 
+            });
+            
+            // Refresh latest message
+            socket.emit("get_latest_message", {
+              senderId: user._id,
+              receiverId: currentUserId,
+            });
+          }
+        });
       };
+
+      // Refresh every 30 seconds to keep counts updated
+      const interval = setInterval(refreshData, 30000);
+      
+      return () => clearInterval(interval);
     }
-  }, [currentUserId, dispatch]);
+  }, [currentUserId, isAllStudents]);
 
   return (
     <Col xxl="3" xl="4" md="5" className="box-col-5">
       <Card className="left-sidebar-wrapper">
-        {/* <div className="left-sidebar-chat">
-          <InputGroup>
-            <InputGroupText>
-              <Search className="search-icon text-gray" />
-            </InputGroupText>
-            <Input type="text" placeholder="Search here..." onChange={(e) => dispatch(setChatSearchData(e.target.value))} />
-          </InputGroup>
-        </div> */}
-
         <div className="advance-options">
           <div className="common-space">
-            <p>User Chats</p>
+            <p>Admin Chats</p>
           </div>
 
           {isAllStudents?.length > 0 ? (
@@ -162,36 +164,66 @@ const Sidebar = () => {
               {isAllStudents
                 .slice()
                 .sort((a, b) => {
-                  const aUnread = userUnreadCounts[a._id] > 0 ? 1 : 0;
-                  const bUnread = userUnreadCounts[b._id] > 0 ? 1 : 0;
-                  if (aUnread !== bUnread) return bUnread - aUnread;
-                  const aTime = userLatestMessages[a._id]?.createdAt || 0;
-                  const bTime = userLatestMessages[b._id]?.createdAt || 0;
+                  // Sort by unread count first, then by latest message time
+                  const aUnread = userUnreadCounts[a._id] || 0;
+                  const bUnread = userUnreadCounts[b._id] || 0;
+                  
+                  if (aUnread !== bUnread) {
+                    return bUnread - aUnread; // Higher unread count first
+                  }
+                  
+                  // If unread counts are same, sort by latest message time
+                  const aTime = userLatestMessages[a._id]?.createdAt || a.lastMessageTime || 0;
+                  const bTime = userLatestMessages[b._id]?.createdAt || b.lastMessageTime || 0;
                   return new Date(bTime).getTime() - new Date(aTime).getTime();
                 })
-                .map((item) => (
-                  <li key={item._id} className={`common-space ${selectedUser?._id === item._id ? "active" : ""}`} onClick={() => changeUserClick(item)}>
-                    <div className="chat-time">
+                .map((item) => {
+                  const unreadCount = userUnreadCounts[item._id] || 0;
+                  const latestMessage = userLatestMessages[item._id]?.message || item.lastMessage;
+                  
+                  return (
+                    <li 
+                      key={item._id} 
+                      className={`common-space ${selectedUser?._id === item._id ? "active" : ""}`} 
+                      onClick={() => changeUserClick(item)}
+                    >
                       <div className="chat-time">
-                        <div className="active-profile">
-                          <Image className="img-fluid rounded-circle" src={item?.image || dynamicImage("user/user.png")} alt="user" />
+                        <div className="chat-time">
+                          <div className="active-profile">
+                            <Image 
+                              className="img-fluid rounded-circle" 
+                              src={item?.image || dynamicImage("user/user.png")} 
+                              alt="user" 
+                            />
+                          </div>
+                          <div>
+                            <span>{item.name || item.firstName || item.lastName}</span>
+                            <p>
+                              {latestMessage 
+                                ? (latestMessage.length > 30 
+                                    ? `${latestMessage.substring(0, 30)}...` 
+                                    : latestMessage)
+                                : "Click to start chatting..."
+                              }
+                            </p>
+                          </div>
                         </div>
                         <div>
-                          <span>{item.name}</span>
-                          <p>{item.lastMessage ? (item.lastMessage.length > 30 ? `${item.lastMessage.substring(0, 30)}...` : item.lastMessage) : "Click to start chatting..."}</p>
+                          {(userLatestMessages[item._id]?.createdAt || item.lastMessageTime) && (
+                            <p>{FormatTime(userLatestMessages[item._id]?.createdAt || item.lastMessageTime)}</p>
+                          )}
+                          {unreadCount > 0 && (
+                            <Badge color="success">{unreadCount}</Badge>
+                          )}
                         </div>
                       </div>
-                      <div>
-                        {item.lastMessageTime && <p>{FormatTime(item.lastMessageTime)}</p>}
-                        {item.unreadCount > 0 && <Badge color="success">{item.unreadCount}</Badge>}
-                      </div>
-                    </div>
-                  </li>
-                ))}
+                    </li>
+                  );
+                })}
             </ul>
           ) : (
             <div className="d-flex justify-content-center align-items-center py-5">
-              <Empty description={<Typography.Text type="secondary">No students found</Typography.Text>} />
+              <Empty description={<Typography.Text type="secondary">No admin users found</Typography.Text>} />
             </div>
           )}
         </div>

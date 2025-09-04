@@ -8,6 +8,8 @@ export const KEYS = {
   BANNER: "banner",
   CATEGORY: "category",
   COURSE: "course",
+  COURSE_PURCHASED: "course-purchased",
+  COURSE_UNPURCHASED: "course-unpurchased",
   BLOG: "blog",
   LATEST_NEWS: "latest-news",
   FAQ: "faq",

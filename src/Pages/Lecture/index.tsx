@@ -1,22 +1,15 @@
 import { Image, Pagination } from "antd";
 import { TableDocument, Youtube } from "iconsax-react";
-import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Card, CardBody, Col, Container, Row } from "reactstrap";
 import { Queries } from "../../Api";
+import { RouteList } from "../../Constant";
 import Breadcrumbs from "../../CoreComponents/Breadcrumbs";
 import { useBasicTableFilterHelper } from "../../Utils/hook";
-import LinkModel from "./LinkModel";
-import PdfModel from "./PdfModel";
 
 const Lecture = () => {
-  const [isLinkModal, setLinkModal] = useState(false);
-  const [isPdfModal, setPdfModal] = useState(false);
-  const [link, setLink] = useState<string | null>(null);
-  const [pdf, setPdf] = useState<string | null>(null);
-
   const { id } = useParams();
-
+  const navigate = useNavigate();
   const { pageNumber, pageSize, params, handlePaginationChange } = useBasicTableFilterHelper({
     initialParams: { page: 1, limit: 6 },
     debounceDelay: 500,
@@ -31,7 +24,7 @@ const Lecture = () => {
 
   return (
     <>
-      <Breadcrumbs mainTitle="Lecture" parent="Course" />
+      <Breadcrumbs mainTitle="Lecture" parent="Lecture" />
       <Container>
         <Row>
           <Col sm="12">
@@ -68,23 +61,13 @@ const Lecture = () => {
                                           </Col>
                                           <Col md={8}>
                                             <ul className="flex-row comment-social float-start float-md-end">
-                                              <li
-                                                onClick={() => {
-                                                  setLink(item?.youtubeLink);
-                                                  setLinkModal(true);
-                                                }}
-                                              >
+                                              <li onClick={() => navigate(RouteList.Video, { state: item?.youtubeLink })}>
                                                 <div className="d-flex align-items-center">
                                                   <Youtube size="20" color="#000" className="me-2" />
                                                   Link
                                                 </div>
                                               </li>
-                                              <li
-                                                onClick={() => {
-                                                  setPdf(item?.PDF);
-                                                  setPdfModal(true);
-                                                }}
-                                              >
+                                              <li onClick={() => navigate(RouteList.Pdf, { state: item?.PDF })}>
                                                 <div className="d-flex align-items-center">
                                                   <TableDocument size="20" color="#000" className="me-2" />
                                                   PDF
@@ -114,10 +97,6 @@ const Lecture = () => {
           </Col>
         </Row>
       </Container>
-
-      {/* Pass selected state values here */}
-      <LinkModel isModal={isLinkModal} setModal={setLinkModal} link={link} />
-      <PdfModel isModal={isPdfModal} setModal={setPdfModal} pdf={pdf} />
     </>
   );
 };

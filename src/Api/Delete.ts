@@ -1,7 +1,7 @@
 import { notification } from "antd";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import { getToken } from "../Utils";
-import { AntdNotification } from "../Utils/toast";
+// import { AntdNotification } from "../Utils/toast";
 import { HTTP_STATUS } from "../Constant";
 
 async function Delete<T, TInput>(url: string, data?: TInput): Promise<T> {
@@ -20,7 +20,7 @@ async function Delete<T, TInput>(url: string, data?: TInput): Promise<T> {
     const resData = response.data;
 
     if (response.status === HTTP_STATUS.OK) {
-      AntdNotification(notification, "success", resData.message);
+      // AntdNotification(notification, "success", resData.message);
       return resData;
     } else {
       return null as T;

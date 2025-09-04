@@ -1,7 +1,7 @@
 import { InvalidateQueryFilters, QueryKey, useMutation, UseMutationOptions, useQueryClient } from "@tanstack/react-query";
 import { notification } from "antd";
 import { useNavigate } from "react-router-dom";
-import { AntdNotification, ErrorMessage } from "../../Utils/toast";
+// import { AntdNotification, ErrorMessage } from "../../Utils/toast";
 import { useAppDispatch } from "../../ReduxToolkit/Hooks";
 import { CombinedErrorResponse } from "../../Types";
 import { HTTP_STATUS, RouteList } from "../../Constant";
@@ -30,7 +30,7 @@ function useApiDelete<TInput, TResponse>(mutationKey: QueryKey, callback: (input
           });
           break;
         default:
-          AntdNotification(notification, "error", ErrorMessage(error));
+          // AntdNotification(notification, "error", ErrorMessage(error));
           break;
       }
     },

@@ -5,7 +5,7 @@ import { CombinedErrorResponse } from "../../Types";
 import { useAppDispatch } from "../../ReduxToolkit/Hooks";
 import { HTTP_STATUS, RouteList } from "../../Constant";
 import { logout } from "../../ReduxToolkit/Slice/AuthSlice";
-import { AntdNotification, ErrorMessage } from "../../Utils/toast";
+// import { AntdNotification, ErrorMessage } from "../../Utils/toast";
 
 function useApiPost<TInput, TResponse>(mutationKey: QueryKey, callback: (input: TInput) => Promise<TResponse>, options?: UseMutationOptions<TResponse, CombinedErrorResponse, TInput>) {
   const q = useQueryClient();
@@ -30,7 +30,7 @@ function useApiPost<TInput, TResponse>(mutationKey: QueryKey, callback: (input: 
           });
           break;
         default:
-          AntdNotification(notification, "error", ErrorMessage(error));
+          // AntdNotification(notification, "error", ErrorMessage(error));
           break;
       }
     },

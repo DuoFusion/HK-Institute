@@ -1,11 +1,12 @@
-import { message } from "antd";
-import { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import ScrollToTop from "../Utils/ScrollToTop";
 import Footer from "./Footer";
 import Header from "./Header";
 import Loader from "./Loader";
 import Sidebar from "./Sidebar";
+import ToastNotification from "../CoreComponents/ToastNotification";
+// import { useEffect } from "react";
+// import { message } from "antd";
 
 const Layout = () => {
   const location = useLocation();
@@ -17,15 +18,7 @@ const Layout = () => {
   //     // ✅ Block Inspect / View Source / PrintScreen
   //     if (
   //       e.type === "contextmenu" || // right click
-  //       (e.type === "keydown" &&
-  //         (
-  //           key === "f12" ||
-  //           key === "printscreen" || // some browsers
-  //           key === "prt sc" ||      // some browsers
-  //           ((e as KeyboardEvent).altKey && key.includes("print")) ||
-  //           ((e as KeyboardEvent).ctrlKey && key === "u") ||
-  //           ((e as KeyboardEvent).ctrlKey && (e as KeyboardEvent).shiftKey && ["i", "j", "c", "s"].includes(key))
-  //         ))
+  //       (e.type === "keydown" && (key === "f12" || key === "printscreen" || key === "prt sc" || ((e as KeyboardEvent).altKey && key.includes("print")) || ((e as KeyboardEvent).ctrlKey && key === "u") || ((e as KeyboardEvent).ctrlKey && (e as KeyboardEvent).shiftKey && ["i", "j", "c", "s"].includes(key))))
   //     ) {
   //       e.preventDefault();
   //       e.stopPropagation();
@@ -48,20 +41,25 @@ const Layout = () => {
   //   };
   // }, []);
 
-  // ✅ Optional DevTools detect
+  // // ✅ Extra: DevTools detection
   // useEffect(() => {
   //   const check = setInterval(() => {
   //     if (window.outerWidth - window.innerWidth > 200 || window.outerHeight - window.innerHeight > 200) {
   //       message.error("DevTools detected 🚫");
-  //       window.location.href = "/blocked"; // window.close() tab band nathi kartu
+  //       // 👉 redirect user or block page
+  //       window.close(); 
+  //       window.location.href = "/blocked";
+  //       // OR window.close(); (may not work in all browsers)
   //     }
   //   }, 1000);
+
   //   return () => clearInterval(check);
   // }, []);
 
   return (
     <>
       <ScrollToTop />
+      <ToastNotification />
       <div className="page-wrapper compact-wrapper">
         <Header />
         <div className="page-body-wrapper">

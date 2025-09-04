@@ -10,6 +10,8 @@ import Dashboard from "../Pages/Dashboard";
 import LatestNews from "../Pages/LatestNews";
 import LatestNewsDescription from "../Pages/LatestNews/LatestNewsDescription";
 import Lecture from "../Pages/Lecture";
+import Pdf from "../Pages/Lecture/Pdf";
+import Video from "../Pages/Lecture/Video";
 import PrivacyPolicy from "../Pages/PrivacyPolicy";
 import Setting from "../Pages/Setting";
 import TermsAndConditions from "../Pages/TermsAndConditions";
@@ -33,4 +35,6 @@ export const AppRoutes = [
   { path: RouteList.LatestNews, element: <LatestNews /> },
   { path: `${RouteList.LatestNewsDescription}/:id`, element: <LatestNewsDescription /> },
   { path: `${RouteList.Lecture}/:id`, element: <Lecture /> },
+  { path: RouteList.Pdf, element: <Pdf /> },
+  { path: RouteList.Video, element: <Video /> },
 ];
